@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <import resource="classpath:applicationContext-service.xml"></import>
+        <import resource="classpath:applicationContext-dao.xml" />
+
+        <!--        shiro 配置-->
+        <!--        1）配置自定义realm或者jdbcRealm-->
+        <bean id="myRealm" class="com.hunguigu.realm.MyRealm">
+<!--                <property name="credentialsMatcher" ref="credentialsMatcher"></property>-->
+        </bean>
+
+        <!--        2）配置安全管理器-->
+        <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+                <property name="realm" ref="myRealm"></property>
+
+                <!--注入rememberMe cookie管理器-->
+                <property name="rememberMeManager" ref="rememberMeManager"/>
+
+                <!--                缓存管理器-->
+                <property name="cacheManager" ref="cacheManager"/>
+        </bean>
+
+        <!--        3）配置shiro过滤器 ShiroFilterFactoryBean-->
+        <!--        属性配置
+        id设置的和webxml中的过滤器名字一样-->
+        <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+                <property name="loginUrl" value="/index.jsp"></property>
+                <property name="unauthorizedUrl" value="/false.jsp"></property>
+                <property name="securityManager" ref="securityManager"></property>
+                <property name="filterChainDefinitions">
+                        <value>
+                                /staffDengLu*=anon
+                                /js/**=anon
+                                /css/**=anon
+                                /fonts/**=anon
+                                /images/**=anon
+                                /index*=anon
+                                /main*=user
+                                /admin*=authc
+                                /user/**=authc
+                                /admin/**=authc
+                                /admin/**=roles[administrator]
+                                /admin/**=perms[user:add]
+                                /**=user <!--  user:   必须认证后才能访问的资源 或者rememberMe=true也可通过    -->
+                                /index*=anon
+                        </value>
+                </property>
+        </bean>
+
+        <!--        4)保证实现了Shiro内部lifecycle函数的bean执行  LifecycleBeanPostProcessor-->
+        <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+
+        <!-- md5配置-->
+        <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="md5"></property>
+                <property name="hashIterations" value="5"></property>
+        </bean>
+
+        <!-- shiro  rememberMe配置-->
+        <!--手动指定cookie-->
+        <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+                <constructor-arg value="rememberMe"/>
+                <property name="httpOnly" value="true"/>
+                <property name="maxAge" value="432000"/><!-- 5天 -->
+        </bean>
+
+        <!-- rememberMe管理器 -->
+        <bean id="rememberMeManager"
+              class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+                <!--注入自定义cookie(主要是设置寿命, 默认的一年太长)-->
+                <property name="cookie" ref="rememberMeCookie"/>
+        </bean>
+
+        <!-- 开启shiro注解支持-->
+        <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+              depends-on="lifecycleBeanPostProcessor" />
+
+
+        <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+                <property name="securityManager" ref="securityManager"></property>
+        </bean>
+
+        <!--        进行缓存的操作配置-->
+        <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+                <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
+        </bean>
+
+</beans>

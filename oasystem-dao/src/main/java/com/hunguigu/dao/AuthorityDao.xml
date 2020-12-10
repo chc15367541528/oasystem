@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.AuthorityDao">
+  <resultMap id="authoritymap" type="Authority">
+
+  </resultMap>
+
+  <select id="query" parameterType="Authority" resultMap="authoritymap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="authoritymap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="Authority" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="Authority">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="Authority">
+
+  </update>
+
+</mapper>

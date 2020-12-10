@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.RoleDao">
+  <resultMap id="rolemap" type="Role">
+  </resultMap>
+
+  <select id="query" parameterType="Role" resultMap="rolemap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="rolemap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="Role" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="Role">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="Role">
+
+  </update>
+
+</mapper>

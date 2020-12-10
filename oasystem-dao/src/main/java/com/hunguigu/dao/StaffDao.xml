@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.StaffDao">
+  <resultMap id="staffmap" type="Staff">
+    <collection property="role" javaType="Role"
+                column="role_id" select="com.hunguigu.dao.RoleDao.queryById"
+                fetchType="lazy">
+    </collection>
+  </resultMap>
+
+  <select id="query" parameterType="Staff" resultMap="staffmap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="staffmap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="Staff" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="Staff">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="Staff">
+
+  </update>
+
+</mapper>

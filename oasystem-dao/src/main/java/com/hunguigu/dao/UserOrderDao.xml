@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.UserOrderDao">
+  <resultMap id="userordermap" type="UserOrder">
+    <collection property="user" javaType="User"
+                column="user_id" select="com.hunguigu.dao.UserDao.queryById"
+                fetchType="lazy">
+    </collection>
+    <collection property="merchants" javaType="User"
+                column="merchants_id" select="com.hunguigu.dao.UserDao.queryById"
+                fetchType="lazy">
+    </collection>
+    <collection property="commodity" javaType="Commodity"
+                column="commodity_id" select="com.hunguigu.dao.CommodityDao.queryById"
+                fetchType="lazy">
+    </collection>
+  </resultMap>
+
+  <select id="query" parameterType="UserOrder" resultMap="userordermap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="userordermap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="UserOrder" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="UserOrder">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="UserOrder">
+
+  </update>
+
+</mapper>

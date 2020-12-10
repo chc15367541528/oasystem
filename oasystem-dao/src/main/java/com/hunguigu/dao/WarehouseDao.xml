@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.WarehouseDao">
+  <resultMap id="warehousemap" type="Warehouse">
+  </resultMap>
+
+  <select id="query" parameterType="Warehouse" resultMap="warehousemap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="warehousemap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="Warehouse" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="Warehouse">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="Warehouse">
+
+  </update>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.CommodityTypeDao">
+  <resultMap id="commoditytypemap" type="CommodityType">
+
+  </resultMap>
+
+  <select id="query" parameterType="CommodityType" resultMap="commoditytypemap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="commoditytypemap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="CommodityType" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="CommodityType">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="CommodityType">
+
+  </update>
+
+</mapper>

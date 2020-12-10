@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.UserDao">
+  <resultMap id="usermap" type="User">
+    <collection property="merchants" javaType="User"
+                column="user_id" select="com.hunguigu.dao.UserDao.queryById"
+                fetchType="lazy">
+    </collection>
+    <collection property="role" javaType="Role"
+                column="role_id" select="com.hunguigu.dao.RoleDao.queryById"
+                fetchType="lazy">
+    </collection>
+  </resultMap>
+
+  <select id="query" parameterType="User" resultMap="usermap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="usermap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="User" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="User">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="User">
+
+  </update>
+
+  <select id="staffDengLu" parameterType="User" resultMap="usermap">
+
+    </select>
+
+  <select id="queryStaff_RoleBySid" parameterType="int" resultType="Role">
+
+    </select>
+
+  <select id="queryUserName" parameterType="String" resultMap="usermap">
+
+    </select>
+
+  <select id="queryRoleNameByUserName" parameterType="String" resultType="String">
+
+    </select>
+
+  <select id="queryMenuNameByUserName" parameterType="String" resultType="String">
+
+    </select>
+
+</mapper>

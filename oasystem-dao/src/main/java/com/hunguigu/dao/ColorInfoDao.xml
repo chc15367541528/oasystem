@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.ColorInfoDao">
+  <resultMap id="colorInfomap" type="ColorInfo">
+    <collection property="commodity" javaType="Commodity"
+                column="commodity_id" select="com.hunguigu.dao.CommodityDao.queryById"
+                fetchType="lazy">
+    </collection>
+  </resultMap>
+
+  <select id="query" parameterType="ColorInfo" resultMap="colorInfomap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="colorInfomap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="ColorInfo" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="ColorInfo">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="ColorInfo">
+
+  </update>
+
+</mapper>

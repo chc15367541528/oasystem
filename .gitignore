@@ -1,0 +1,4 @@
+# Project exclude paths
+/oasystem-dao/target/
+/oasystem-service/target/
+/oasystem-web/target/

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.MenuDao">
+  <resultMap id="menumap" type="Menu">
+
+  </resultMap>
+
+  <select id="query" parameterType="Menu" resultMap="menumap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="menumap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="Menu" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="Menu">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="Menu">
+
+  </update>
+
+</mapper>

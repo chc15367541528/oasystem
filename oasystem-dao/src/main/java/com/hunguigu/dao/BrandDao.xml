@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hunguigu.dao.BrandDao">
+  <resultMap id="brandmap" type="Brand">
+  </resultMap>
+
+  <select id="query" parameterType="Brand" resultMap="brandmap">
+
+  </select>
+
+  <select id="queryById" parameterType="int" resultMap="brandmap">
+
+  </select>
+
+  <select id="queryTotal" parameterType="Brand" resultType="int">
+
+  </select>
+
+  <insert id="insert" parameterType="Brand">
+
+  </insert>
+
+  <delete id="delete" parameterType="int">
+
+  </delete>
+
+  <update id="update" parameterType="Brand">
+
+  </update>
+
+</mapper>

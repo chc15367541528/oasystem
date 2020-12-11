@@ -13,7 +13,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="settlementapplymap">
-
+     SELECT * FROM settlementapply WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="SettlementApply" resultType="int">

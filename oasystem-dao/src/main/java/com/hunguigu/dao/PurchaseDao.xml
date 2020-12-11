@@ -13,7 +13,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="purchasemap">
-
+        SELECT * FROM purchase WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="Purchase" resultType="int">

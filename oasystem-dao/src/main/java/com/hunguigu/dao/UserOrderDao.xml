@@ -21,7 +21,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="userordermap">
-
+    SELECT * FROM userorder WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="UserOrder" resultType="int">

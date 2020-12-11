@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.ShoppingCartDao">
   <resultMap id="shoppingcartmap" type="ShoppingCart">
-    <collection property="commodity" javaType="Commodity"
+    <association property="commodity" javaType="Commodity"
                 column="commodity_id" select="com.hunguigu.dao.CommodityDao.queryById"
                 fetchType="lazy">
-    </collection>
+    </association>
     <collection property="user" javaType="User"
                 column="user_id" select="com.hunguigu.dao.UserDao.queryById"
                 fetchType="lazy">
@@ -14,18 +14,41 @@
                 column="colorinfo_id" select="com.hunguigu.dao.ColorInfoDao.queryById"
                 fetchType="lazy">
     </collection>
+    <collection property="versionInfo" javaType="VersionInfo"
+                column="versioninfo_id" select="com.hunguigu.dao.VersionInfoDao.queryById"
+                fetchType="lazy">
+    </collection>
   </resultMap>
 
   <select id="query" parameterType="ShoppingCart" resultMap="shoppingcartmap">
+        SELECT
+  `id`,
+  `user_id`,
+  `commodity_id`,
+  `colorinfo_id`,
+  `versioninfo_id`,
+  `number`,
+  `remark`
+FROM
+  `sk_item`.`shoppingcart`
+  <where>
+    <if test="user!=null">and user_id=#{user.id}</if>
+  </where>
 
   </select>
 
   <select id="queryById" parameterType="int" resultMap="shoppingcartmap">
-
+    SELECT * FROM shoppingcart WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="ShoppingCart" resultType="int">
-
+    SELECT
+    count(*)
+    FROM
+    `sk_item`.`shoppingcart`
+    <where>
+      <if test="user!=null">and user_id=#{user.id}</if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="ShoppingCart">

@@ -25,6 +25,10 @@ public class UserOrder {
     @JSONField(format = "yyyy-MM-dd hh:ss:mm")
     private Date shipmenttime;//出库时间
 
+    private String color;//颜色
+
+    private String version;//版本
+
     private Float price;/*单价*/
 
     private Integer number;/*数量*/
@@ -109,6 +113,22 @@ public class UserOrder {
 
     public void setShipmenttime(Date shipmenttime) {
         this.shipmenttime = shipmenttime;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public Float getPrice() {

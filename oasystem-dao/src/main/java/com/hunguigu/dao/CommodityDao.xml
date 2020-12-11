@@ -3,11 +3,11 @@
 <mapper namespace="com.hunguigu.dao.CommodityDao">
   <resultMap id="commoditymap" type="Commodity">
     <collection property="commodityType" javaType="CommodityType"
-                column="commodity_type_id" select="com.hunguigu.dao.TypeDao.queryById"
+                column="commodity_type_id" select="com.hunguigu.dao.CommodityTypeDao.queryById"
                 fetchType="lazy">
     </collection>
     <collection property="brand" javaType="Brand"
-                column="brand_id" select="com.hunguigu.dao.TypeDao.queryById"
+                column="brand_id" select="com.hunguigu.dao.BrandDao.queryById"
                 fetchType="lazy">
     </collection>
   </resultMap>
@@ -17,7 +17,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="commoditymap">
-
+        SELECT * FROM commodity WHERE id=#{id}
     </select>
 
   <select id="queryTotal" parameterType="Commodity" resultType="int">

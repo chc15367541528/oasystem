@@ -10,7 +10,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="commoditytypemap">
-
+        SELECT * FROM commoditytype WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="CommodityType" resultType="int">

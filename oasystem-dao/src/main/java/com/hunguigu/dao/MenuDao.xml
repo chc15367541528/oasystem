@@ -10,7 +10,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="menumap">
-
+         SELECT * FROM menu WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="Menu" resultType="int">

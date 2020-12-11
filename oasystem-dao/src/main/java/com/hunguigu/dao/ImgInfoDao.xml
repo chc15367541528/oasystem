@@ -4,7 +4,7 @@
   <resultMap id="imginfomap" type="ImgInfo">
 
     <collection property="commodity" javaType="Commodity"
-                column="commodity_id" select="com.hunguigu.dao.ImgInfoDao.queryById"
+                column="commodity_id" select="com.hunguigu.dao.CommodityDao.queryById"
                 fetchType="lazy">
     </collection>
 
@@ -15,7 +15,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="imginfomap">
-
+        SELECT * FROM imginfo WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="ImgInfo" resultType="int">

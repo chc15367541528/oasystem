@@ -9,7 +9,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="brandmap">
-
+    SELECT * FROM brand WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="Brand" resultType="int">

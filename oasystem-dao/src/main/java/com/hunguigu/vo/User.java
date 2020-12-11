@@ -16,7 +16,7 @@ public class User {
 
     private String phone;//电话
 
-    private User merchants;//提货商户对象
+    private Integer user_id;//提货商户对象
 
     private Float balance;//余额
 
@@ -25,23 +25,6 @@ public class User {
     private String storeName;/*店铺名称(默认为空，商户显示)*/
 
     private String remark;//备注
-
-    public User() {
-    }
-
-    public User(Integer id, String account, String password, String name, String address, String phone, User merchants, Float balance, Role role, String storeName, String remark) {
-        this.id = id;
-        this.account = account;
-        this.password = password;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.merchants = merchants;
-        this.balance = balance;
-        this.role = role;
-        this.storeName = storeName;
-        this.remark = remark;
-    }
 
     public Integer getId() {
         return id;
@@ -91,12 +74,12 @@ public class User {
         this.phone = phone;
     }
 
-    public User getMerchants() {
-        return merchants;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setMerchants(User merchants) {
-        this.merchants = merchants;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public Float getBalance() {

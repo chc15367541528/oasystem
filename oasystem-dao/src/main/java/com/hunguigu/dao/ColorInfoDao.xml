@@ -13,7 +13,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="colorInfomap">
-
+    SELECT * FROM colorinfo WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="ColorInfo" resultType="int">

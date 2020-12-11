@@ -13,7 +13,7 @@
   </select>
 
   <select id="queryById" parameterType="int" resultMap="staffmap">
-
+    SELECT * FROM staff WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="Staff" resultType="int">

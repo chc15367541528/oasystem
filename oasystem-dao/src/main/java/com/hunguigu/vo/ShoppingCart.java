@@ -12,21 +12,11 @@ public class ShoppingCart {
 
     private ColorInfo colorInfo;/*商品颜色*/
 
+    private VersionInfo versionInfo;//版本信息
+
     private Integer number;//商品件数
 
     private String remark;//备注
-
-    public ShoppingCart() {
-    }
-
-    public ShoppingCart(Integer id, User user, Commodity commodity, ColorInfo colorInfo, Integer number, String remark) {
-        this.id = id;
-        this.user = user;
-        this.commodity = commodity;
-        this.colorInfo = colorInfo;
-        this.number = number;
-        this.remark = remark;
-    }
 
     public Integer getId() {
         return id;
@@ -58,6 +48,14 @@ public class ShoppingCart {
 
     public void setColorInfo(ColorInfo colorInfo) {
         this.colorInfo = colorInfo;
+    }
+
+    public VersionInfo getVersionInfo() {
+        return versionInfo;
+    }
+
+    public void setVersionInfo(VersionInfo versionInfo) {
+        this.versionInfo = versionInfo;
     }
 
     public Integer getNumber() {

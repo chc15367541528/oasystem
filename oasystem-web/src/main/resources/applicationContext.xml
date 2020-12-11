@@ -42,20 +42,7 @@
                 <property name="securityManager" ref="securityManager"></property>
                 <property name="filterChainDefinitions">
                         <value>
-                                /staffDengLu*=anon
-                                /js/**=anon
-                                /css/**=anon
-                                /fonts/**=anon
-                                /images/**=anon
-                                /index*=anon
-                                /main*=user
-                                /admin*=authc
-                                /user/**=authc
-                                /admin/**=authc
-                                /admin/**=roles[administrator]
-                                /admin/**=perms[user:add]
-                                /**=user <!--  user:   必须认证后才能访问的资源 或者rememberMe=true也可通过    -->
-                                /index*=anon
+                                /**=anon
                         </value>
                 </property>
         </bean>

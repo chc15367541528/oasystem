@@ -2,12 +2,9 @@ package com.hunguigu.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.hunguigu.dao.ColorInfoDao;
-import com.hunguigu.dao.VersionInfoDao;
 import com.hunguigu.service.ColorInfoService;
-import com.hunguigu.service.VersionInfoService;
 import com.hunguigu.vo.ColorInfo;
 import com.hunguigu.vo.PageVo;
-import com.hunguigu.vo.VersionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

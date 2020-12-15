@@ -1,35 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.StaffDao">
-  <resultMap id="staffmap" type="Staff">
-    <collection property="role" javaType="Role"
-                column="role_id" select="com.hunguigu.dao.RoleDao.queryById"
-                fetchType="lazy">
-    </collection>
-  </resultMap>
+    <resultMap id="staffmap" type="Staff">
+        <collection property="role" javaType="Role"
+                    column="role_id" select="com.hunguigu.dao.RoleDao.queryById"
+                    fetchType="lazy">
+        </collection>
+    </resultMap>
 
-  <select id="query" parameterType="Staff" resultMap="staffmap">
+    <select id="query" parameterType="Staff" resultMap="staffmap">
+        SELECT
+        `id`,
+        `name`,
+        `account`,
+        `password`,
+        `role_id`,
+        `remark`
+        FROM
+        `sk_item`.`staff`
+        <where>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+
+    <select id="queryById" parameterType="int" resultMap="staffmap">
+    SELECT * FROM staff
+
+    SELECT
+  `id`,
+  `name`,
+  `account`,
+  `password`,
+  `role_id`,
+  `remark`
+FROM
+  `sk_item`.`staff`
+WHERE `id` = #{id}
+
 
   </select>
 
-  <select id="queryById" parameterType="int" resultMap="staffmap">
-    SELECT * FROM staff WHERE id=#{id}
-  </select>
+    <select id="queryTotal" parameterType="Staff" resultType="int">
+        SELECT
+        count(*)
+        FROM
+        `sk_item`.`staff`
+        <where>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
 
-  <select id="queryTotal" parameterType="Staff" resultType="int">
+    <insert id="insert" parameterType="Staff">
 
-  </select>
+INSERT INTO `sk_item`.`staff` (
+  `id`,
+  `name`,
+  `account`,
+  `password`,
+  `role_id`,
+  `remark`
+)
+VALUES
+  (
+    #{id},
+    #{name},
+    #{account},
+    #{password},
+    #{role_id},
+    #{remark}
+  )
+    </insert>
 
-  <insert id="insert" parameterType="Staff">
+    <delete id="delete" parameterType="int">
+DELETE
+FROM
+  `sk_item`.`staff`
+WHERE `id` = #{id}
 
-  </insert>
+    </delete>
 
-  <delete id="delete" parameterType="int">
+    <update id="update" parameterType="Staff">
+UPDATE
+  `sk_item`.`staff`
+SET
+  `id` = #{id},
+  `name` = #{name},
+  `account` = #{account},
+  `password` = #{password},
+  `role_id` = #{role_id},
+  `remark` = #{remark}
+WHERE `id` = #{id}
 
-  </delete>
-
-  <update id="update" parameterType="Staff">
-
-  </update>
+    </update>
 
 </mapper>

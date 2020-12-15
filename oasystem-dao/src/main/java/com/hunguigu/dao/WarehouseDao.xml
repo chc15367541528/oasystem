@@ -5,7 +5,17 @@
   </resultMap>
 
   <select id="query" parameterType="Warehouse" resultMap="warehousemap">
-
+        SELECT
+  `id`,
+  `name`,
+  `adress`,
+  `phone`,
+  `remark`
+FROM
+  `sk_item`.`warehouse`
+  <where>
+    <if test="name!=null">and NAME LIKE CONCAT('%',#{name},'%')</if>
+  </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="warehousemap">
@@ -13,19 +23,48 @@
   </select>
 
   <select id="queryTotal" parameterType="Warehouse" resultType="int">
-
+    SELECT
+    count(*)
+    FROM
+    `sk_item`.`warehouse`
+    <where>
+      <if test="name!=null">and NAME LIKE CONCAT('%',#{name},'%')</if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="Warehouse">
-
+INSERT INTO `sk_item`.`warehouse` (
+  `name`,
+  `adress`,
+  `phone`,
+  `remark`
+)
+VALUES
+  (
+    #{name},
+    #{adress},
+    #{phone},
+    #{remark}
+  )
   </insert>
 
   <delete id="delete" parameterType="int">
+    DELETE
+FROM
+  `sk_item`.`warehouse`
+WHERE `id` =#{id};
 
   </delete>
 
   <update id="update" parameterType="Warehouse">
-
+UPDATE
+  `sk_item`.`warehouse`
+SET
+  `name` =#{name},
+  `adress` =#{adress},
+  `phone` =#{phone},
+  `remark` =#{remark}
+WHERE `id` =#{id}
   </update>
 
 </mapper>

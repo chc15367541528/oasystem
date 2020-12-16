@@ -61,7 +61,6 @@ VALUES
     #{remark}
   )
   </insert>
-
   <delete id="delete" parameterType="int">
 
   </delete>

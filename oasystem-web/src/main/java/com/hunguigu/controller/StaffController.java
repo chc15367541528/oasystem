@@ -2,6 +2,7 @@ package com.hunguigu.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.hunguigu.service.RoleService;
 import com.hunguigu.service.StaffService;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.Staff;
@@ -15,6 +16,8 @@ public class StaffController {
 
     @Autowired
     StaffService service;
+    @Autowired
+    RoleService roleService;
 
     @RequestMapping(value = "/query.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
@@ -26,11 +29,21 @@ public class StaffController {
         return JSONObject.toJSONString(pageVo, SerializerFeature.DisableCircularReferenceDetect);
     }
 
+    @RequestMapping(value = "/queryAll.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryAll(){
+        return JSONObject.toJSONString(service.queryAll(), SerializerFeature.DisableCircularReferenceDetect);
+    }
+
     @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String insert(Staff staff){
-
+    public String insert(Staff staff,
+                         @RequestParam(value = "role_id",defaultValue = "0")int role_id){
+        if(role_id!=0){
+            staff.setRole(roleService.queryById(role_id));
+        }
         int row = service.insert(staff);
         String msg = row==1?"添加成功":"添加失败";
 

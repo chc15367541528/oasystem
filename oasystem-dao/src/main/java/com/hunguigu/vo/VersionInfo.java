@@ -4,17 +4,7 @@ public class VersionInfo {
     private Integer id;
     private Commodity commodity;/*商品*/
     private String version;/*版本*/
-    private String remark;
-
-    public VersionInfo() {
-    }
-
-    public VersionInfo(Integer id, Commodity commodity, String version, String remark) {
-        this.id = id;
-        this.commodity = commodity;
-        this.version = version;
-        this.remark = remark;
-    }
+    private Float price;
 
     public Integer getId() {
         return id;
@@ -40,11 +30,21 @@ public class VersionInfo {
         this.version = version;
     }
 
-    public String getRemark() {
-        return remark;
+    public Float getPrice() {
+        return price;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "VersionInfo{" +
+                "id=" + id +
+                ", commodity=" + commodity +
+                ", version='" + version + '\'' +
+                ", price='" + price + '\'' +
+                '}';
     }
 }

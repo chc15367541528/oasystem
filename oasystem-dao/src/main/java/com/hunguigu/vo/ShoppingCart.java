@@ -14,6 +14,8 @@ public class ShoppingCart {
 
     private VersionInfo versionInfo;//版本信息
 
+    private String commodity_img;//商品图片
+
     private Integer number;//商品件数
 
     private String remark;//备注
@@ -72,5 +74,27 @@ public class ShoppingCart {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCommodity_img() {
+        return commodity_img;
+    }
+
+    public void setCommodity_img(String commodity_img) {
+        this.commodity_img = commodity_img;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", user=" + user +
+                ", commodity=" + commodity +
+                ", colorInfo=" + colorInfo +
+                ", versionInfo=" + versionInfo +
+                ", commodity_img='" + commodity_img + '\'' +
+                ", number=" + number +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

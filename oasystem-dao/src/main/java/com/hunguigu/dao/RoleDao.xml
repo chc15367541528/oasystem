@@ -5,7 +5,15 @@
   </resultMap>
 
   <select id="query" parameterType="Role" resultMap="rolemap">
-
+    SELECT
+    `id`,
+    `name`,
+    `remark`
+    FROM
+    `sk_item`.`role`
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="rolemap">
@@ -18,6 +26,13 @@ FROM
   </select>
 
   <select id="queryTotal" parameterType="Role" resultType="int">
+SELECT
+count(*)
+FROM
+  `sk_item`.`role`
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
 
   </select>
 

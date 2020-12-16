@@ -8,6 +8,7 @@ import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ public class ShoppingCartController {
 
     @RequestMapping(value = "/query.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
+    @CrossOrigin
     public String query(ShoppingCart shoppingCart,
                         @RequestParam(value = "user_id", defaultValue = "0") int user_id,
                         @RequestParam(value = "page", defaultValue = "1") int page,
@@ -34,6 +36,22 @@ public class ShoppingCartController {
         PageVo<ShoppingCart> pagevo= shoppingCartService.query(shoppingCart,page,rows);
         System.out.println(pagevo);
         return JSONObject.toJSONString(pagevo,SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    @RequestMapping(value = "/delete.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String delete(String ids){
+
+        String[] idList = ids.split(",");
+        int rows = 0;
+        for(int i=0;i<idList.length;i++){
+            rows+=shoppingCartService.delete(Integer.parseInt(idList[i]));
+        }
+        String msg = rows==idList.length?"删除成功":"删除失败";
+
+        return msg;
+
     }
 
 }

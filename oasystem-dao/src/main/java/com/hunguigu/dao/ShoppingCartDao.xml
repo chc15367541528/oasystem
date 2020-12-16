@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.ShoppingCartDao">
   <resultMap id="shoppingcartmap" type="ShoppingCart">
+    <result column="commodity_img" property="commodity_img"></result>
     <association property="commodity" javaType="Commodity"
                 column="commodity_id" select="com.hunguigu.dao.CommodityDao.queryById"
                 fetchType="lazy">
@@ -21,15 +22,7 @@
   </resultMap>
 
   <select id="query" parameterType="ShoppingCart" resultMap="shoppingcartmap">
-        SELECT
-  `id`,
-  `user_id`,
-  `commodity_id`,
-  `colorinfo_id`,
-  `versioninfo_id`,
-  `number`,
-  `remark`
-FROM
+        SELECT * FROM
   `sk_item`.`shoppingcart`
   <where>
     <if test="user!=null">and user_id=#{user.id}</if>
@@ -56,7 +49,10 @@ FROM
   </insert>
 
   <delete id="delete" parameterType="int">
-
+DELETE
+FROM
+  `sk_item`.`shoppingcart`
+WHERE `id` =#{id}
   </delete>
 
   <update id="update" parameterType="ShoppingCart">

@@ -29,6 +29,8 @@ public class UserOrder {
 
     private String version;//版本
 
+    private String img;//商品图片
+
     private Float price;/*单价*/
 
     private Integer number;/*数量*/
@@ -40,32 +42,6 @@ public class UserOrder {
     private Integer state;//状态(0 待付款|1 (待发货|待收货)|2 待提货|3 已提货 )
 
     private String remark;//备注
-
-    public UserOrder() {
-    }
-
-    public UserOrder(Integer id, String order_number, User user, User merchants, Date createtime, Date shipmenttime, Float price, Integer number, Commodity commodity, Float totalmoney, Integer state, String remark) {
-        this.id = id;
-        this.order_number = order_number;
-        this.user = user;
-        this.merchants = merchants;
-        this.createtime = createtime;
-        this.shipmenttime = shipmenttime;
-        this.price = price;
-        this.number = number;
-        this.commodity = commodity;
-        this.totalmoney = totalmoney;
-        this.state = state;
-        this.remark = remark;
-    }
-
-    public Commodity getCommodity() {
-        return commodity;
-    }
-
-    public void setCommodity(Commodity commodity) {
-        this.commodity = commodity;
-    }
 
     public Integer getId() {
         return id;
@@ -131,6 +107,14 @@ public class UserOrder {
         this.version = version;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public Float getPrice() {
         return price;
     }
@@ -145,6 +129,14 @@ public class UserOrder {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
     }
 
     public Float getTotalmoney() {
@@ -169,5 +161,26 @@ public class UserOrder {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "UserOrder{" +
+                "id=" + id +
+                ", order_number='" + order_number + '\'' +
+                ", user=" + user +
+                ", merchants=" + merchants +
+                ", createtime=" + createtime +
+                ", shipmenttime=" + shipmenttime +
+                ", color='" + color + '\'' +
+                ", version='" + version + '\'' +
+                ", img='" + img + '\'' +
+                ", price=" + price +
+                ", number=" + number +
+                ", commodity=" + commodity +
+                ", totalmoney=" + totalmoney +
+                ", state=" + state +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

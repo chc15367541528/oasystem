@@ -25,10 +25,14 @@ public interface UserDao {
 
     public List<Role> queryStaff_RoleBySid(int sid);
 
+    //通过用户名查询用户信息
     public User queryUserName(String username);
 
     public List<String> queryRoleNameByUserName(String username);
 
     public List<String> queryMenuNameByUserName(String username);
+
+    //选择提货商户
+    public List<User> queryRole(int rid);
 
 }

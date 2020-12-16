@@ -20,4 +20,10 @@ public interface UserService {
 
     public List<User> queryAll();
 
+    //通过用户名查询用户信息
+    public User queryUserName(String username);
+
+    //选择提货商户
+    public List<User> queryRole(int rid);
+
 }

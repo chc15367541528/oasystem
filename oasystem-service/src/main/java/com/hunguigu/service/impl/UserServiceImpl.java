@@ -51,4 +51,14 @@ public class UserServiceImpl implements UserService {
     public List<User> queryAll() {
         return userDao.query(new User());
     }
+
+    @Override
+    public User queryUserName(String username) {
+        return userDao.queryUserName(username);
+    }
+
+    @Override
+    public List<User> queryRole(int rid) {
+        return userDao.queryRole(rid);
+    }
 }

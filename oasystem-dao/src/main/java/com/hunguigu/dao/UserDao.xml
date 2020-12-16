@@ -2,10 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.UserDao">
   <resultMap id="usermap" type="User">
-<!--    <collection property="merchants" javaType="User"-->
-<!--                column="user_id" select="com.hunguigu.dao.UserDao.queryById"-->
-<!--                fetchType="lazy">-->
-<!--    </collection>-->
     <collection property="role" javaType="Role"
                 column="role_id" select="com.hunguigu.dao.RoleDao.queryById"
                 fetchType="lazy">
@@ -13,7 +9,10 @@
   </resultMap>
 
   <select id="query" parameterType="User" resultMap="usermap">
-
+    SELECT * FROM user
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="usermap">
@@ -21,15 +20,18 @@
   </select>
 
   <select id="queryTotal" parameterType="User" resultType="int">
-
+    SELECT count(*) FROM user
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
   </select>
 
-  <insert id="insert" parameterType="User">
-
+   <insert id="insert" parameterType="User">
+       insert into user values (null,#{account},#{password},#{name},#{address},#{phone},#{user_id},#{balance},#{role.id},#{remark})
   </insert>
 
   <delete id="delete" parameterType="int">
-
+        delete from user where id=#{id}
   </delete>
 
   <update id="update" parameterType="User">
@@ -37,23 +39,27 @@
   </update>
 
   <select id="staffDengLu" parameterType="User" resultMap="usermap">
-
+        select * from user where account=#{account} and password=#{password}
     </select>
 
   <select id="queryStaff_RoleBySid" parameterType="int" resultType="Role">
-
+        SELECT * FROM USER WHERE role_id=#{role.id}
     </select>
 
-  <select id="queryUserName" parameterType="String" resultMap="usermap">
-
+   <select id="queryUserName" parameterType="String" resultMap="usermap">
+        select * from user where name=#{name}
     </select>
 
   <select id="queryRoleNameByUserName" parameterType="String" resultType="String">
 
-    </select>
+  </select>
 
   <select id="queryMenuNameByUserName" parameterType="String" resultType="String">
 
+  </select>
+
+ <select id="queryRole" resultMap="usermap" parameterType="int">
+       SELECT * FROM USER WHERE role_id=2
     </select>
 
 </mapper>

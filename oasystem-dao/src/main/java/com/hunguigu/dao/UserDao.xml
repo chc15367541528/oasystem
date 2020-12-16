@@ -25,42 +25,9 @@
   </select>
 
   <insert id="insert" parameterType="User">
-INSERT INTO `sk_item`.`userorder` (
-  `id`,
-  `order_number`,
-  `user_id`,
-  `merchants_id`,
-  `createtime`,
-  `shipmenttime`,
-  `color`,
-  `version`,
-  `img`,
-  `price`,
-  `number`,
-  `commodity_id`,
-  `totalmoney`,
-  `state`,
-  `remark`
-)
-VALUES
-  (
-    NULL,
-    #{order_number},
-    #{user.id},
-    #{merchants.id},
-    #{createtime},
-    #{shipmenttime},
-    #{color},
-    #{version},
-    #{img},
-    #{price},
-    #{number},
-    #{commodity.id},
-    #{totalmoney},
-    #{state},
-    #{remark}
-  )
+
   </insert>
+
   <delete id="delete" parameterType="int">
 
   </delete>

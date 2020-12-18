@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Staff")
+@RequestMapping("/staff")
 public class StaffController {
 
     @Autowired
@@ -70,8 +70,11 @@ public class StaffController {
     @RequestMapping(value = "/update.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String update(Staff staff){
-
+    public String update(Staff staff,
+                         @RequestParam(value = "role_id", defaultValue = "0")int role_id){
+        if(role_id != 0){
+            staff.setRole(roleService.queryById(role_id));
+        }
         int row = service.update(staff);
         String msg = row==1?"修改成功":"修改失败";
 

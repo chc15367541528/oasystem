@@ -39,7 +39,7 @@ public class UserOrder {
 
     private Float totalmoney;/*总价*/
 
-    private Integer state;//状态(0 待付款|1 (待发货|待收货)|2 待提货|3 已提货 )
+    private Integer state;//状态(0 待付款|1 待发货|2 待提货|3 已提货 )
 
     private String remark;//备注
 

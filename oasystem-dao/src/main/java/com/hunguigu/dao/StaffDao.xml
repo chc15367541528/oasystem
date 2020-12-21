@@ -24,8 +24,6 @@
     </select>
 
     <select id="queryById" parameterType="int" resultMap="staffmap">
-    SELECT * FROM staff
-
     SELECT
   `id`,
   `name`,
@@ -36,7 +34,6 @@
 FROM
   `sk_item`.`staff`
 WHERE `id` = #{id}
-
 
   </select>
 
@@ -83,11 +80,10 @@ WHERE `id` = #{id}
 UPDATE
   `sk_item`.`staff`
 SET
-  `id` = #{id},
   `name` = #{name},
   `account` = #{account},
   `password` = #{password},
-  `role_id` = #{role_id},
+  `role_id` = #{role.id},
   `remark` = #{remark}
 WHERE `id` = #{id}
 

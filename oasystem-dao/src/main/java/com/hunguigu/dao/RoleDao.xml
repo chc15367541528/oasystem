@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.RoleDao">
-  <resultMap id="rolemap" type="Role">
+  <resultMap id="roleMap" type="Role">
   </resultMap>
 
-  <select id="query" parameterType="Role" resultMap="rolemap">
+  <select id="query" parameterType="Role" resultMap="roleMap">
     SELECT
     `id`,
     `name`,
@@ -14,15 +14,6 @@
     <where>
       <if test="name!=null">and name like concat('%',#{name},'%')</if>
     </where>
-  </select>
-
-  <select id="queryById" parameterType="int" resultMap="rolemap">
-SELECT
-  `id`,
-  `name`,
-  `remark`
-FROM
-  `sk_item`.`role` WHERE id=#{id}
   </select>
 
   <select id="queryTotal" parameterType="Role" resultType="int">
@@ -36,16 +27,45 @@ FROM
 
   </select>
 
+  <select id="queryById" parameterType="int" resultMap="roleMap">
+SELECT
+  `id`,
+  `name`,
+  `remark`
+FROM
+  `sk_item`.`role` WHERE id=#{id}
+  </select>
+
   <insert id="insert" parameterType="Role">
+INSERT INTO `sk_item`.`role` (`id`, `name`, `remark`)
+VALUES
+  (#{id}, #{name}, #{remark}) ;
 
   </insert>
 
   <delete id="delete" parameterType="int">
+DELETE
+FROM
+  `sk_item`.`role`
+WHERE `id` = #{id}
 
   </delete>
 
   <update id="update" parameterType="Role">
+UPDATE
+  `sk_item`.`role`
+SET
+  `id` = #{id},
+  `name` = #{name},
+  `remark` = #{remark}
+WHERE `id` = #{id} ;
 
   </update>
 
+  <select id="queryRolesByUid" parameterType="int" resultType="Role">
+		select r.* from role r
+		    left join userrole_info ur
+			on r.id = ur.rid
+			where ur.uid =#{uid}
+	</select>
 </mapper>

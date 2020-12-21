@@ -10,23 +10,13 @@ public class WarehouseDetails {
 
     private Commodity commodity;//商品对象
 
+    private String img;//商品图片
+
     private Integer number;//商品数量
 
     private Integer min_number;//最低库存
 
     private String remark;//备注
-
-    public WarehouseDetails() {
-    }
-
-    public WarehouseDetails(Integer id, Warehouse warehouse, Commodity commodity, Integer number, Integer min_number, String remark) {
-        this.id = id;
-        this.warehouse = warehouse;
-        this.commodity = commodity;
-        this.number = number;
-        this.min_number = min_number;
-        this.remark = remark;
-    }
 
     public Integer getId() {
         return id;
@@ -52,6 +42,14 @@ public class WarehouseDetails {
         this.commodity = commodity;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public Integer getNumber() {
         return number;
     }
@@ -74,5 +72,18 @@ public class WarehouseDetails {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "WarehouseDetails{" +
+                "id=" + id +
+                ", warehouse=" + warehouse +
+                ", commodity=" + commodity +
+                ", img='" + img + '\'' +
+                ", number=" + number +
+                ", min_number=" + min_number +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

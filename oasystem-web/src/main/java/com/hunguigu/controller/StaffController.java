@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Staff")
+@RequestMapping("/staff")
 public class StaffController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class StaffController {
     @CrossOrigin
     public String queryTotal(Staff staff,
                                     @RequestParam(value = "page", defaultValue = "1")int page,
-                                    @RequestParam(value = "rows", defaultValue = "6")int rows){
+                                    @RequestParam(value = "rows", defaultValue = "5")int rows){
         PageVo<Staff> pageVo = service.query(staff, page, rows);
         return JSONObject.toJSONString(pageVo, SerializerFeature.DisableCircularReferenceDetect);
     }
@@ -34,6 +34,14 @@ public class StaffController {
     @CrossOrigin
     public String queryAll(){
         return JSONObject.toJSONString(service.queryAll(), SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    @RequestMapping(value = "/queryById.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryById(@RequestParam(value = "id", defaultValue = "1")int id){
+
+        return JSONObject.toJSONString(service.queryById(id), SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
@@ -70,21 +78,15 @@ public class StaffController {
     @RequestMapping(value = "/update.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String update(Staff staff){
-
+    public String update(Staff staff,
+                         @RequestParam(value = "role_id", defaultValue = "0")int role_id){
+        if(role_id != 0){
+            staff.setRole(roleService.queryById(role_id));
+        }
         int row = service.update(staff);
         String msg = row==1?"修改成功":"修改失败";
 
         return msg;
-
-    }
-
-    @RequestMapping(value = "/queryById.action",produces = {"text/json;charset=utf-8"})
-    @ResponseBody
-    @CrossOrigin
-    public String queryById(@RequestParam(value = "id", defaultValue = "1")int id){
-
-        return JSONObject.toJSONString(service.queryById(id), SerializerFeature.DisableCircularReferenceDetect);
 
     }
 }

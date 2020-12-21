@@ -1,5 +1,7 @@
 package com.hunguigu.vo;
 
+import java.util.List;
+
 /**
  * 角色信息表
  */
@@ -7,6 +9,8 @@ public class Role {
     private Integer id;
 
     private String name;//角色名
+
+    private List<Menu> menus;
 
     private String remark;//备注
 
@@ -24,6 +28,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
     }
 
     public String getRemark() {

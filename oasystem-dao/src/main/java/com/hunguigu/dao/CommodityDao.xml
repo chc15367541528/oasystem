@@ -13,17 +13,27 @@
   </resultMap>
 
 <select id="query" parameterType="Commodity" resultMap="commoditymap">
-    SELECT * FROM commodity
+    SELECT
+    *
+    FROM
+    `sk_item`.`commodity`
     <where>
-      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+        <if test="name!=null">and name like concat('%',#{name},'%')</if>
+        <if test="commodityType!=null">AND commodity_type_id =#{commodityType.id}</if>
+        <if test="brand!=null">AND brand_id =#{brand.id}</if>
     </where>
   </select>
 
   <select id="queryTotal" parameterType="Commodity" resultType="int">
-    SELECT count(*) FROM commodity
-    <where>
-      <if test="name!=null">and name like concat('%',#{name},'%')</if>
-    </where>
+      SELECT
+      count(*)
+      FROM
+      `sk_item`.`commodity`
+      <where>
+          <if test="name!=null">and name like concat('%',#{name},'%')</if>
+          <if test="commodityType!=null">AND commodity_type_id =#{commodityType.id}</if>
+          <if test="brand!=null">AND brand_id =#{brand.id}</if>
+      </where>
   </select>
 
 <insert id="insert" parameterType="Commodity">

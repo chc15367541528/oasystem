@@ -3,8 +3,7 @@ package com.hunguigu.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hunguigu.service.CommodityService;
-import com.hunguigu.vo.Commodity;
-import com.hunguigu.vo.PageVo;
+import com.hunguigu.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,52 +18,76 @@ public class CommodityController {
     @Autowired
     CommodityService service;
 
-    @RequestMapping("/query.action")
+    @RequestMapping(value = "/query.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public PageVo<Commodity> query(Commodity commodity,
-                                   @RequestParam(value = "page",defaultValue = "1") int page,
-                                   @RequestParam(value = "rows",defaultValue = "10") int rows){
-        System.out.println("进入控制层");
+    public String query(Commodity commodity,
+                        @RequestParam(value = "commodityType_id", defaultValue = "0") int commodityType_id,
+                        @RequestParam(value = "brand_id", defaultValue = "0") int brand_id,
+                        @RequestParam(value = "page", defaultValue = "1") int page,
+                        @RequestParam(value = "rows",defaultValue = "5") int rows){
 
-        PageVo<Commodity> pageVo=service.query(commodity,page,rows);
-        System.out.println(pageVo.toString());
+        if(commodityType_id!=0){
+            CommodityType commodityType = new CommodityType();
+            commodity.setId(commodityType_id);
+            commodity.setCommodityType(commodityType);
+        }
 
-        return service.query(commodity,page,rows);
+        if(brand_id!=0){
+            Brand brand = new Brand();
+            brand.setId(brand_id);
+            commodity.setBrand(brand);
+        }
+
+        return JSONObject.toJSONString(service.query(commodity,page,rows), SerializerFeature.DisableCircularReferenceDetect);
     }
 
-
-    @RequestMapping("/add.action")
+    @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String add(Commodity commodity){
-        int row=service.insert(commodity);
+    public String insert(Commodity commodity){
 
-        return row==1?"添加成功":"添加失败";
+        int row = service.insert(commodity);
+        String msg = row==1?"添加成功":"添加失败";
+
+        return msg;
+
     }
 
-    @RequestMapping("/delete.action")
+    @RequestMapping(value = "/delete.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String delete(int  id){
-        int row=service.delete(id);
-        return row==1?"删除成功":"删除失败";
+    public String delete(String ids){
+
+        String[] idList = ids.split(",");
+        int rows = 0;
+        for(int i=0;i<idList.length;i++){
+            rows+=service.delete(Integer.parseInt(idList[i]));
+        }
+        String msg = rows==idList.length?"删除成功":"删除失败";
+
+        return msg;
+
     }
 
-    @RequestMapping("/update.action")
+    @RequestMapping(value = "/update.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
     public String update(Commodity commodity){
-        int row=service.update(commodity);
 
-        return row==1?"修改成功":"修改加失败";
+        int row =service.update(commodity);
+        String msg = row==1?"修改成功":"修改失败";
+
+        return msg;
+
     }
 
-    @RequestMapping("/queryById.action")
+    @RequestMapping(value = "/queryById.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String queryById(int  id){
+    public String querybyid(@RequestParam(value = "id", defaultValue = "1")int id){
 
         return JSONObject.toJSONString(service.queryById(id), SerializerFeature.DisableCircularReferenceDetect);
+
     }
 }

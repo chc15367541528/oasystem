@@ -62,4 +62,10 @@ WHERE `id` = #{id} ;
 
   </update>
 
+  <select id="queryRolesByUid" parameterType="int" resultType="Role">
+		select r.* from role r
+		    left join userrole_info ur
+			on r.id = ur.rid
+			where ur.uid =#{uid}
+	</select>
 </mapper>

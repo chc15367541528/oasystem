@@ -19,4 +19,11 @@ public interface RoleDao {
     public int delete(int id);
 
     public int update(Role role);
+
+    /**
+     * 根据用户id，查询当前用户拥有的角色信息
+     * @param uid  用户id
+     * @return 角色信息集合
+     */
+    public List<Role> queryRolesByUid(int uid);
 }

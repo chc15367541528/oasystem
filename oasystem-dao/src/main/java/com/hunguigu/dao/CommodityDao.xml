@@ -12,28 +12,35 @@
     </collection>
   </resultMap>
 
-  <select id="query" parameterType="Commodity" resultMap="commoditymap">
-
+<select id="query" parameterType="Commodity" resultMap="commoditymap">
+    SELECT * FROM commodity
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
   </select>
-
-  <select id="queryById" parameterType="int" resultMap="commoditymap">
-        SELECT * FROM commodity WHERE id=#{id}
-    </select>
 
   <select id="queryTotal" parameterType="Commodity" resultType="int">
-
+    SELECT count(*) FROM commodity
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
   </select>
 
-  <insert id="insert" parameterType="Commodity">
-
+<insert id="insert" parameterType="Commodity">
+        insert into commodity values(null,#{name},#{specifications},#{commodityType.id},#{brand.id},#{img},#{remark})
     </insert>
 
   <delete id="delete" parameterType="int">
-
+        delete from commodity where id={id}
     </delete>
 
   <update id="update" parameterType="Commodity">
-
+        update commodity set name=#{name},specifications=#{specifications},commodityType=#{commodityType.id},brand=#{brand.id},img=#{img},remark=#{remark} where id=#{id}
   </update>
+
+  <select id="queryById" parameterType="int" resultType="Commodity">
+        SELECT * FROM commodity WHERE id=#{id}
+  </select>
+
 
 </mapper>

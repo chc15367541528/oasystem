@@ -13,6 +13,8 @@ public interface UserDao {
 
     public User queryById(int id);
 
+    public User queryById2(int id);
+
     public int queryTotal(User user);
 
     public int insert(User user);

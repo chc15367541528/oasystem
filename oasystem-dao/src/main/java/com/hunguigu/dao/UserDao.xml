@@ -23,6 +23,10 @@
         SELECT * FROM user WHERE id=#{id}
   </select>
 
+    <select id="queryById2" parameterType="int" resultType="User">
+        SELECT * FROM user WHERE id=#{id}
+  </select>
+
   <select id="queryTotal" parameterType="User" resultType="int">
     SELECT count(*) FROM user
     <where>

@@ -24,6 +24,8 @@ public class UserOrderServiceImpl implements UserOrderService {
         pageVo.setRows(userOrderDao.query(userOrder));
         pageVo.setTotal(userOrderDao.queryTotal(userOrder));
 
+        System.out.println(pageVo.getRows());
+
         return pageVo;
     }
 
@@ -50,5 +52,11 @@ public class UserOrderServiceImpl implements UserOrderService {
     @Override
     public List<UserOrder> queryAll() {
         return userOrderDao.query(new UserOrder());
+    }
+
+    @Override
+    public List<UserOrder> queryByState(int state) {
+        List<UserOrder> userOrders = userOrderDao.queryByState(state);
+        return userOrders;
     }
 }

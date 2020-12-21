@@ -163,6 +163,27 @@ public class UserOrder {
         this.remark = remark;
     }
 
+    public UserOrder(Integer id, String order_number, User user, User merchants, Date createtime, Date shipmenttime, String color, String version, String img, Float price, Integer number, Commodity commodity, Float totalmoney, Integer state, String remark) {
+        this.id = id;
+        this.order_number = order_number;
+        this.user = user;
+        this.merchants = merchants;
+        this.createtime = createtime;
+        this.shipmenttime = shipmenttime;
+        this.color = color;
+        this.version = version;
+        this.img = img;
+        this.price = price;
+        this.number = number;
+        this.commodity = commodity;
+        this.totalmoney = totalmoney;
+        this.state = state;
+        this.remark = remark;
+    }
+
+    public UserOrder() {
+    }
+
     @Override
     public String toString() {
         return "UserOrder{" +

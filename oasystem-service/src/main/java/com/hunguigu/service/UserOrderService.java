@@ -20,4 +20,8 @@ public interface UserOrderService {
 
     public List<UserOrder> queryAll();
 
+    //通过订单状态查询订单信息
+    public List<UserOrder> queryByState(int state);
+
+
 }

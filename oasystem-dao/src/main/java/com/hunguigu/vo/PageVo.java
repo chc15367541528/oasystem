@@ -22,4 +22,20 @@ public class PageVo<T> {
     public void setTotal(int total) {
         this.total = total;
     }
+
+    public PageVo(List<T> rows, int total) {
+        this.rows = rows;
+        this.total = total;
+    }
+
+    public PageVo() {
+    }
+
+    @Override
+    public String toString() {
+        return "PageVo{" +
+                "rows=" + rows +
+                ", total=" + total +
+                '}';
+    }
 }

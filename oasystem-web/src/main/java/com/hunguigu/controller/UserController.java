@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @ResponseBody
+   @ResponseBody
     @RequestMapping("/query.action")
     @CrossOrigin
     public String query(User user,

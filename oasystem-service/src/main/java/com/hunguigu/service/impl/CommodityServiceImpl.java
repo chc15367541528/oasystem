@@ -52,4 +52,5 @@ public class CommodityServiceImpl implements CommodityService {
     public List<Commodity> queryAll() {
         return commodityDao.query(new Commodity());
     }
+
 }

@@ -20,4 +20,10 @@ public interface UserOrderDao {
 
     public int update(UserOrder userOrder);
 
+    //通过订单状态查询订单信息
+    public List<UserOrder> queryByState(int state);
+
+    //查询所有订单信息
+    public  List<UserOrder> queryAll(UserOrder userOrder);
+
 }

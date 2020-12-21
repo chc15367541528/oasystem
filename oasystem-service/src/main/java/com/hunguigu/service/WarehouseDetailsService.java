@@ -1,6 +1,7 @@
 package com.hunguigu.service;
 
 import com.hunguigu.vo.Authority;
+import com.hunguigu.vo.Commodity;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.WarehouseDetails;
 
@@ -19,5 +20,7 @@ public interface WarehouseDetailsService {
     public int update(WarehouseDetails warehouseDetails);
 
     public List<WarehouseDetails> queryAll();
+
+    public List<Commodity> queryComByWarehouseId(int warehouseId);
 
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.hunguigu.dao.WarehouseDao;
 import com.hunguigu.dao.WarehouseDetailsDao;
 import com.hunguigu.service.WarehouseDetailsService;
+import com.hunguigu.vo.Commodity;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.WarehouseDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class WarehouseDetailServiceImpl implements WarehouseDetailsService {
     @Override
     public List<WarehouseDetails> queryAll() {
         return warehouseDetailsDao.query(new WarehouseDetails());
+    }
+
+    @Override
+    public List<Commodity> queryComByWarehouseId(int warehouseId) {
+        return warehouseDetailsDao.queryComByWarehouseId(warehouseId);
     }
 }

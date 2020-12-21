@@ -14,19 +14,9 @@ public class Commodity {
 
     private Brand brand;//商品品牌对象
 
+    private String img;//商品图片
+
     private String remark;//备注
-
-    public Commodity() {
-    }
-
-    public Commodity(Integer id, String name, String specifications, CommodityType commodityType, Brand brand, String remark) {
-        this.id = id;
-        this.name = name;
-        this.specifications = specifications;
-        this.commodityType = commodityType;
-        this.brand = brand;
-        this.remark = remark;
-    }
 
     public Integer getId() {
         return id;
@@ -68,11 +58,32 @@ public class Commodity {
         this.brand = brand;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "Commodity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", specifications='" + specifications + '\'' +
+                ", commodityType=" + commodityType +
+                ", brand=" + brand +
+                ", img='" + img + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

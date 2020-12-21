@@ -1,5 +1,6 @@
 package com.hunguigu.dao;
 
+import com.hunguigu.vo.Commodity;
 import com.hunguigu.vo.WarehouseDetails;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +20,7 @@ public interface WarehouseDetailsDao {
     public int delete(int id);
 
     public int update(WarehouseDetails warehouseDetails);
+
+    public List<Commodity> queryComByWarehouseId(int warehouseId);
 
 }

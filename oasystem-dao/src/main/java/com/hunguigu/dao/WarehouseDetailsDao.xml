@@ -13,7 +13,14 @@
     </resultMap>
 
     <select id="query" parameterType="WarehouseDetails" resultMap="warehousedetailmap">
-
+        SELECT
+          *
+        FROM
+          `sk_item`.`warehousedetails`
+          <where>
+              <if test="warehouse!=null">and warehouse_id =#{warehouse.id}</if>
+              <if test="commodity!=null">AND commodity_id IN (SELECT id FROM commodity WHERE NAME LIKE CONCAT('%',#{commodity.name},'%'))</if>
+          </where>
     </select>
 
     <select id="queryById" parameterType="int" resultMap="warehousedetailmap">
@@ -21,7 +28,14 @@
     </select>
 
     <select id="queryTotal" parameterType="WarehouseDetails" resultType="int">
-
+        SELECT
+        count(*)
+        FROM
+        `sk_item`.`warehousedetails`
+        <where>
+            <if test="warehouse!=null">and warehouse_id =#{warehouse.id}</if>
+            <if test="commodity!=null">AND commodity_id IN (SELECT id FROM commodity WHERE NAME LIKE CONCAT('%',#{commodity.name},'%'))</if>
+        </where>
     </select>
 
     <insert id="insert" parameterType="WarehouseDetails">
@@ -29,11 +43,19 @@
     </insert>
 
     <delete id="delete" parameterType="int">
-
+        DELETE
+FROM
+  `sk_item`.`warehousedetails`
+WHERE `id` =#{id}
     </delete>
 
     <update id="update" parameterType="WarehouseDetails">
 
     </update>
+
+    <select id="queryComByWarehouseId" parameterType="int" resultType="Commodity">
+        SELECT * FROM commodity
+WHERE id NOT IN(SELECT commodity_id FROM warehousedetails WHERE warehouse_id =#{warehouseId})
+    </select>
 
 </mapper>

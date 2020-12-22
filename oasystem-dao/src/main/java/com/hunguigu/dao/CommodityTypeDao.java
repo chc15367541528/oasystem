@@ -20,4 +20,5 @@ public interface CommodityTypeDao {
 
     public int update(CommodityType commodityType);
 
+    public List<CommodityType> queryAllName();
 }

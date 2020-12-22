@@ -19,4 +19,6 @@ public interface CommodityTypeService {
 
     public List<CommodityType> queryAll();
 
+    public List<CommodityType> queryAllName();
+
 }

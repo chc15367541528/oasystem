@@ -6,7 +6,10 @@
   </resultMap>
 
   <select id="query" parameterType="CommodityType" resultMap="commoditytypemap">
-
+        select * from commoditytype
+        <where>
+          <if test="name!=null">and name like concat('%',#{name},'%')</if>
+        </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="commoditytypemap">
@@ -14,19 +17,25 @@
   </select>
 
   <select id="queryTotal" parameterType="CommodityType" resultType="int">
-
+    select count(*) from commoditytype
+    <where>
+      <if test="name!=null">and name like concat('%',#{name},'%')</if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="CommodityType">
-
+        insert into commoditytype values (null,#{name},#{remark})
   </insert>
 
   <delete id="delete" parameterType="int">
-
+        delete from commoditytype where id=#{id}
   </delete>
 
   <update id="update" parameterType="CommodityType">
-
+        update commoditytype set name=#{name},remark=#{remark} where id=#{id}
   </update>
 
+    <select id="queryAllName" resultMap="commoditytypemap">
+        select name from commoditytype
+    </select>
 </mapper>

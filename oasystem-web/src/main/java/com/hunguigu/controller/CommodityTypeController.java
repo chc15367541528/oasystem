@@ -63,11 +63,12 @@ public class CommodityTypeController {
         return JSONObject.toJSONString(service.queryById(id), SerializerFeature.DisableCircularReferenceDetect);
     }
 
-    @RequestMapping("/queryAllName.action")
+    @RequestMapping("/queryAll.action")
     @ResponseBody
     @CrossOrigin
-    public String queryAllName(){
-        System.out.println(service.queryAllName());
-        return JSONObject.toJSONString(service.queryAllName(), SerializerFeature.DisableCircularReferenceDetect);
+    public String queryAll(){
+
+        return JSONObject.toJSONString(service.queryAll(), SerializerFeature.DisableCircularReferenceDetect);
+
     }
 }

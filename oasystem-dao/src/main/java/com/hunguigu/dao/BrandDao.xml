@@ -5,7 +5,13 @@
   </resultMap>
 
   <select id="query" parameterType="Brand" resultMap="brandmap">
-
+    SELECT
+      *
+    FROM
+      `sk_item`.`brand`
+      <where>
+        <if test="name!=null">and name=#{name}</if>
+      </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="brandmap">
@@ -13,7 +19,13 @@
   </select>
 
   <select id="queryTotal" parameterType="Brand" resultType="int">
-
+    SELECT
+    count(*)
+    FROM
+    `sk_item`.`brand`
+    <where>
+      <if test="name!=null">and name=#{name}</if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="Brand">

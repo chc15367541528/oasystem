@@ -55,8 +55,4 @@ public class CommodityTypeServiceImpl implements CommodityTypeService{
         return commodityTypeDao.query(new CommodityType());
     }
 
-    @Override
-    public List<CommodityType> queryAllName() {
-        return commodityTypeDao.queryAllName();
-    }
 }

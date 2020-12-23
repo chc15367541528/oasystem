@@ -19,6 +19,4 @@ public interface CommodityTypeDao {
     public int delete(int id);
 
     public int update(CommodityType commodityType);
-
-    public List<CommodityType> queryAllName();
 }

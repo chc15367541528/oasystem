@@ -35,7 +35,4 @@
         update commoditytype set name=#{name},remark=#{remark} where id=#{id}
   </update>
 
-    <select id="queryAllName" resultMap="commoditytypemap">
-        select name from commoditytype
-    </select>
 </mapper>

@@ -36,19 +36,28 @@
       </where>
   </select>
 
-<insert id="insert" parameterType="Commodity">
+    <insert id="insert" parameterType="Commodity">
         insert into commodity values(null,#{name},#{specifications},#{commodityType.id},#{brand.id},#{img},#{remark})
     </insert>
 
   <delete id="delete" parameterType="int">
-        delete from commodity where id={id}
+        delete from commodity where id=#{id}
     </delete>
 
   <update id="update" parameterType="Commodity">
-        update commodity set name=#{name},specifications=#{specifications},commodityType=#{commodityType.id},brand=#{brand.id},img=#{img},remark=#{remark} where id=#{id}
+        update commodity
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name!=null">name=#{name},</if>
+            <if test="specifications!=null">specifications=#{specifications},</if>
+            <if test="commodityType!=null">commodity_type_id=#{commodityType.id},</if>
+            <if test="brand!=null">brand_id=#{brand.id},</if>
+            <if test="img!=null">img=#{img},</if>
+            <if test="remark!=null">remark=#{remark},</if>
+        </trim>
+        where id=#{id}
   </update>
 
-  <select id="queryById" parameterType="int" resultType="Commodity">
+  <select id="queryById" parameterType="int" resultMap="commoditymap">
         SELECT * FROM commodity WHERE id=#{id}
   </select>
 

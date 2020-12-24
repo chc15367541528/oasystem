@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
     public List<User> queryRole(int rid) {
         return userDao.queryRole(rid);
     }
+
+    @Override
+    public User userDengLu(User user){
+        return userDao.userDengLu(user);
+    }
 }

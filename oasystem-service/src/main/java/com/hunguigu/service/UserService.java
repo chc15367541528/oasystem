@@ -26,4 +26,6 @@ public interface UserService {
     //选择提货商户
     public List<User> queryRole(int rid);
 
+    public User userDengLu(User user);
+
 }

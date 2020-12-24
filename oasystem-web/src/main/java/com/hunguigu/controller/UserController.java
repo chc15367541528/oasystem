@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -21,6 +24,27 @@ public class UserController {
 
     @Autowired
     UserService service;
+
+    @RequestMapping(value = "/login.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map login(User user,
+                     HttpSession session){
+        Map<String,String> map =new HashMap<String,String>();
+        User user1= service.userDengLu(user);
+
+        if(user1!=null){
+            session.setAttribute("user",user1);
+
+            map.put("code","0");
+            map.put("msg","登录成功");
+            map.put("account",user1.getAccount());
+        }else{
+            map.put("code","1");
+            map.put("msg","登录失败");
+        }
+        return map;
+    }
 
    @ResponseBody
     @RequestMapping("/query.action")

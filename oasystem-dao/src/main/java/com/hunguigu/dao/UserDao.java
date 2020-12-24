@@ -23,7 +23,7 @@ public interface UserDao {
 
     public int update(User user);
 
-    public User staffDengLu(User user);
+    public User userDengLu(User user);
 
     public List<Role> queryStaff_RoleBySid(int sid);
 

@@ -46,8 +46,21 @@
 
   </update>
 
-  <select id="staffDengLu" parameterType="User" resultMap="usermap">
-        select * from user where account=#{account} and password=#{password}
+  <select id="userDengLu" parameterType="User" resultMap="usermap">
+SELECT
+  `id`,
+  `account`,
+  `password`,
+  `name`,
+  `address`,
+  `phone`,
+  `user_id`,
+  `balance`,
+  `role_id`,
+  `remark`
+FROM
+  `sk_item`.`user`
+  where account =#{account} and password =#{password}
     </select>
 
   <select id="queryStaff_RoleBySid" parameterType="int" resultType="Role">

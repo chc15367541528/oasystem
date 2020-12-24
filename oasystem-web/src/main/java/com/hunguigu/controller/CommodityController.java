@@ -46,6 +46,29 @@ public class CommodityController {
         return JSONObject.toJSONString(service.query(commodity,page,rows), SerializerFeature.DisableCircularReferenceDetect);
     }
 
+    @RequestMapping(value = "/queryAll.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryAll(Commodity commodity,
+                           @RequestParam(value = "commodityType_id", defaultValue = "0") int commodityType_id,
+                           @RequestParam(value = "brand_id", defaultValue = "0") int brand_id,
+                           @RequestParam(value = "file",required = false) MultipartFile img){
+
+        if(commodityType_id!=0){
+            CommodityType commodityType = new CommodityType();
+            commodityType.setId(commodityType_id);
+            commodity.setCommodityType(commodityType);
+        }
+
+        if(brand_id!=0){
+            Brand brand = new Brand();
+            brand.setId(brand_id);
+            commodity.setBrand(brand);
+        }
+
+        return JSONObject.toJSONString(service.queryAll(commodity), SerializerFeature.DisableCircularReferenceDetect);
+    }
+
     @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin

@@ -1,8 +1,11 @@
 package com.hunguigu.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 商品图片表
  */
+@JsonIgnoreProperties(value = { "handler" })
 public class ImgInfo {
     private Integer id;
 

@@ -1,5 +1,8 @@
 package com.hunguigu.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = { "handler" })
 public class VersionInfo {
     private Integer id;
     private Commodity commodity;/*商品*/

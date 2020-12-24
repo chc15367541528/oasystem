@@ -9,27 +9,39 @@
   </resultMap>
 
   <select id="query" parameterType="VersionInfo" resultMap="versionInfomap">
+    SELECT * FROM commodity_version
+        <where>
+          <if test="version!=null">and version=#{version}</if>
+          <if test="commodity!=null">and commodity_id=#{commodity.id}</if>
+        </where>
+  </select>
 
+  <select id="queryTotal" parameterType="VersionInfo" resultType="int">
+    SELECT count(*) FROM commodity_version
+    <where>
+      <if test="version!=null">and version=#{version}</if>
+      <if test="commodity!=null">and commodity_id=#{commodity.id}</if>
+    </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="versionInfomap">
     SELECT * FROM commodity_version WHERE id=#{id}
   </select>
 
-  <select id="queryTotal" parameterType="VersionInfo" resultType="int">
-
+  <select id="queryByCommodityId" parameterType="int" resultMap="versionInfomap">
+    SELECT * FROM commodity_version WHERE commodity_id=#{id} order by price asc
   </select>
 
   <insert id="insert" parameterType="VersionInfo">
-
+    insert into commodity_version values(null,#{commodity.id},#{version},#{price})
   </insert>
 
   <delete id="delete" parameterType="int">
-
+    delete from commodity_version where id=#{id}
   </delete>
 
   <update id="update" parameterType="VersionInfo">
-
+    update commodity_version set version=#{version},price=#{price} where id=#{id}
   </update>
 
 </mapper>

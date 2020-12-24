@@ -9,7 +9,11 @@
   </resultMap>
 
   <select id="query" parameterType="ColorInfo" resultMap="colorInfomap">
-
+        SELECT * FROM colorinfo
+        <where>
+          <if test="color!=null">and color=#{color}</if>
+          <if test="commodity!=null">and commodity_id=#{commodity.id}</if>
+        </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="colorInfomap">
@@ -17,19 +21,23 @@
   </select>
 
   <select id="queryTotal" parameterType="ColorInfo" resultType="int">
-
+    SELECT count(*) FROM colorinfo
+    <where>
+      <if test="color!=null">and color=#{color}</if>
+      <if test="commodity.id!=null">and commodity_id=#{commodity.id}</if>
+    </where>
   </select>
 
   <insert id="insert" parameterType="ColorInfo">
-
+    insert into colorinfo values(null,#{commodity.id},#{color},#{remark});
   </insert>
 
   <delete id="delete" parameterType="int">
-
+    delete from colorinfo where id=#{id}
   </delete>
 
   <update id="update" parameterType="ColorInfo">
-
+    update colorinfo set color=#{color},remark=#{remark} where id=#{id}
   </update>
 
 </mapper>

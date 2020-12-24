@@ -10,6 +10,8 @@ public interface VersionInfoDao {
 
     public List<VersionInfo> query(VersionInfo versionInfo);
 
+    public List<VersionInfo> queryByCommodityId(int id);
+
     public VersionInfo queryById(int id);
 
     public int queryTotal(VersionInfo versionInfo);

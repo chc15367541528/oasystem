@@ -44,8 +44,9 @@
     </where>
   </select>
 
-  <insert id="insert" parameterType="ShoppingCart">
 
+  <insert id="insert" parameterType="ShoppingCart">
+    insert into shoppingcart values(null,#{user.id},#{commodity.id},#{colorInfo.id},#{versionInfo.id},#{commodity_img},#{number},null)
   </insert>
 
   <delete id="delete" parameterType="int">

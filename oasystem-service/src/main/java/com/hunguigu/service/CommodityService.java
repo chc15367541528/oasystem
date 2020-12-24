@@ -17,7 +17,7 @@ public interface CommodityService {
 
     public int update(Commodity commodity);
 
-    public List<Commodity> queryAll();
+    public List<Commodity> queryAll(Commodity commodity);
 
 
 }

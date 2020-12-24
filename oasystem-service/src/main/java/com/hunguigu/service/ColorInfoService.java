@@ -17,6 +17,6 @@ public interface ColorInfoService {
 
     public int update(ColorInfo colorInfo);
 
-    public List<ColorInfo> queryAll();
+    public List<ColorInfo> queryAll(ColorInfo colorInfo);
 
 }

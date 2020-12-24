@@ -26,6 +26,10 @@ public class ImgInfoServiceImpl implements ImgInfoService {
 
         return pageVo;
     }
+    @Override
+    public List<ImgInfo> queryAll(ImgInfo imgInfo) {
+        return imgInfoDao.query(imgInfo);
+    }
 
     @Override
     public ImgInfo queryById(int id) {
@@ -47,8 +51,4 @@ public class ImgInfoServiceImpl implements ImgInfoService {
         return imgInfoDao.update(imgInfo);
     }
 
-    @Override
-    public List<ImgInfo> queryAll() {
-        return imgInfoDao.query(new ImgInfo());
-    }
 }

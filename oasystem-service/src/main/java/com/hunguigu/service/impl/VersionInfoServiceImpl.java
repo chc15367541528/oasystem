@@ -28,6 +28,16 @@ public class VersionInfoServiceImpl implements VersionInfoService {
     }
 
     @Override
+    public List<VersionInfo> queryAll(VersionInfo versionInfo) {
+        return dao.query(versionInfo);
+    }
+    @Override
+
+    public List<VersionInfo> queryByCommodityId(int id) {
+        return dao.queryByCommodityId(id);
+    }
+
+    @Override
     public VersionInfo queryById(int id) {
         return dao.queryById(id);
     }
@@ -47,8 +57,4 @@ public class VersionInfoServiceImpl implements VersionInfoService {
         return dao.update(versionInfo);
     }
 
-    @Override
-    public List<VersionInfo> queryAll() {
-        return dao.query(new VersionInfo());
-    }
 }

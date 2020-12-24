@@ -9,27 +9,35 @@
   </resultMap>
 
   <select id="query" parameterType="SettlementApply" resultMap="settlementapplymap">
+        select * from settlementapply
+        <where>
+          <if test="type!=null">and type=#{type}</if>
+          <if test="state!=null">and state=#{state}</if>
+        </where>
+  </select>
 
+  <select id="queryTotal" parameterType="SettlementApply" resultType="int">
+    select count(*) from settlementapply
+    <where>
+      <if test="type!=null">and type=#{type}</if>
+      <if test="state!=null">and state=#{state}</if>
+    </where>
   </select>
 
   <select id="queryById" parameterType="int" resultMap="settlementapplymap">
      SELECT * FROM settlementapply WHERE id=#{id}
   </select>
 
-  <select id="queryTotal" parameterType="SettlementApply" resultType="int">
-
-  </select>
-
   <insert id="insert" parameterType="SettlementApply">
-
+        insert into settlementapply values(null,#{user.id},#{type},#{state},#{remark})
   </insert>
 
   <delete id="delete" parameterType="int">
-
+        delete from settlementapply where id=#{id}
   </delete>
 
   <update id="update" parameterType="SettlementApply">
-
+        update settlementapply set state=#{state} where id=#{id}
   </update>
 
 </mapper>

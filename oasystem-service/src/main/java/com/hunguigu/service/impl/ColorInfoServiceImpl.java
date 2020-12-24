@@ -48,7 +48,7 @@ public class ColorInfoServiceImpl implements ColorInfoService {
     }
 
     @Override
-    public List<ColorInfo> queryAll() {
-        return dao.query(new ColorInfo());
+    public List<ColorInfo> queryAll(ColorInfo colorInfo) {
+        return dao.query(colorInfo);
     }
 }

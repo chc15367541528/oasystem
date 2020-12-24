@@ -10,6 +10,8 @@ public interface ImgInfoService {
 
     public PageVo<ImgInfo> query(ImgInfo imgInfo, int page, int rows);
 
+    public List<ImgInfo> queryAll(ImgInfo imgInfo);
+
     public ImgInfo queryById(int id);
 
     public int insert(ImgInfo imgInfo);
@@ -17,7 +19,5 @@ public interface ImgInfoService {
     public int delete(int id);
 
     public int update(ImgInfo imgInfo);
-
-    public List<ImgInfo> queryAll();
 
 }

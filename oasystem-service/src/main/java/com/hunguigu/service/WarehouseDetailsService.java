@@ -21,6 +21,6 @@ public interface WarehouseDetailsService {
 
     public List<WarehouseDetails> queryAll();
 
-    public List<Commodity> queryComByWarehouseId(int warehouseId);
+    public int updateByComAndWarehouse(WarehouseDetails warehouseDetails);
 
 }

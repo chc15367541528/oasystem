@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -62,4 +63,30 @@ public class ImgInfoController {
 
     }
 
+    @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String insert(ImgInfo imgInfo,
+                         @RequestParam(value = "commodity_id", defaultValue = "0") int commodity_id,
+                         @RequestParam(value = "file",required = false) MultipartFile img) throws IOException {
+
+        if(commodity_id!=0){
+            Commodity commodity = new Commodity();
+            commodity.setId(commodity_id);
+            imgInfo.setCommodity(commodity);
+        }
+
+        if(img!=null){
+            imgInfo.setImg(img.getOriginalFilename());  //保存到数据库的【相对路径】
+            //将上传的文件保存到服务器上的前端项目的【绝对路径】
+            /*img.transferTo(new File("D:\\S3\\project-web\\oasystem-web\\src\\assets\\"+img.getOriginalFilename()));*/
+        }
+
+
+        int row = service.insert(imgInfo);
+        String msg = row==1?"添加成功":"添加失败";
+
+        return msg;
+
+    }
 }

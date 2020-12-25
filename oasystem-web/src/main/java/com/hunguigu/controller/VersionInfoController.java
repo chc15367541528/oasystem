@@ -76,8 +76,13 @@ public class VersionInfoController {
     @ResponseBody
     @CrossOrigin
     public String insert(VersionInfo versionInfo,
-                         @RequestParam(value = "brand_id", defaultValue = "0") int brand_id,
-                         @RequestParam(value = "file",required = false) MultipartFile img) throws IOException {
+                         @RequestParam(value = "commodity_id", defaultValue = "0") int commodity_id){
+
+        if (commodity_id!=0){
+            Commodity commodity =new Commodity();
+            commodity.setId(commodity_id);
+            versionInfo.setCommodity(commodity);
+        }
 
         int row = service.insert(versionInfo);
         String msg = row==1?"添加成功":"添加失败";

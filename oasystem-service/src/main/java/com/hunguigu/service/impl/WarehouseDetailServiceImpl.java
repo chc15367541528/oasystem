@@ -56,7 +56,7 @@ public class WarehouseDetailServiceImpl implements WarehouseDetailsService {
     }
 
     @Override
-    public List<Commodity> queryComByWarehouseId(int warehouseId) {
-        return warehouseDetailsDao.queryComByWarehouseId(warehouseId);
+    public int updateByComAndWarehouse(WarehouseDetails warehouseDetails) {
+        return warehouseDetailsDao.updataByComAndWarehouse(warehouseDetails);
     }
 }

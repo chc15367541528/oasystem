@@ -10,6 +10,8 @@ public interface CommodityDao {
 
     public List<Commodity> query(Commodity commodity);
 
+    public List<Commodity> querySaleNum();
+
     public Commodity queryById(int id);
 
     public int queryTotal(Commodity commodity);
@@ -20,4 +22,17 @@ public interface CommodityDao {
 
     public int update(Commodity commodity);
 
+    /**
+     * 根据商品仓库id查询出不属于该仓库的商品
+     * @param warehouseId
+     * @return
+     */
+    public List<Commodity> queryComByWarehouseIdNot(int warehouseId);
+
+    /**
+     * 根据商品仓库id查询出属于该仓库的商品
+     * @param warehouseId
+     * @return
+     */
+    public List<Commodity> queryComByWarehouseId(int warehouseId);
 }

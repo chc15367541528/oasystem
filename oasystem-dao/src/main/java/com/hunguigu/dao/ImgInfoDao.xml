@@ -29,7 +29,19 @@
   </select>
 
     <insert id="insert" parameterType="ImgInfo">
-
+INSERT INTO `sk_item`.`imginfo` (
+  `id`,
+  `commodity_id`,
+  `img`,
+  `remark`
+)
+VALUES
+  (
+    NULL,
+    #{commodity.id},
+    #{img},
+    #{remark}
+  )
     </insert>
 
     <delete id="delete" parameterType="int">

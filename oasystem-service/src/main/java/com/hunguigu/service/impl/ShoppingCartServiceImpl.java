@@ -3,6 +3,7 @@ package com.hunguigu.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.hunguigu.dao.ShoppingCartDao;
 import com.hunguigu.service.ShoppingCartService;
+import com.hunguigu.vo.Commodity;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public List<ShoppingCart> queryAll() {
-        return shoppingCartDao.query(new ShoppingCart());
+    public List<ShoppingCart> queryAll(ShoppingCart shoppingCart) {
+        return shoppingCartDao.query(shoppingCart);
     }
 }

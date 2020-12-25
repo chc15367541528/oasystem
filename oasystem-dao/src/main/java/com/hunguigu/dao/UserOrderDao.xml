@@ -21,6 +21,7 @@
     <where>
       <if test="state!=null">and state=#{state}</if>
       <if test="user!=null">and user_id=#{user.id}</if>
+      <if test="order_number!=null">and order_number=#{order_number}</if>
     </where>
   </select>
 
@@ -33,11 +34,45 @@
     <where>
       <if test="state!=null">and state=#{state}</if>
       <if test="user!=null">and user_id=#{user.id}</if>
+      <if test="order_number!=null">and order_number=#{order_number}</if>
     </where>
   </select>
 
   <insert id="insert" parameterType="UserOrder">
-
+INSERT INTO `sk_item`.`userorder`
+	(`id`,
+	`order_number`,
+	`user_id`,
+	`merchants_id`,
+	`createtime`,
+	`shipmenttime`,
+	`color`,
+	`version`,
+	`img`,
+	`price`,
+	`number`,
+	`commodity_id`,
+	`totalmoney`,
+	`state`,
+	`remark`
+	)
+	VALUES
+	(NULL,
+	#{order_number},
+	#{user.id},
+	#{merchants.id},
+	#{createtime},
+	#{shipmenttime},
+	#{color},
+	#{version},
+	#{img},
+	#{price},
+	#{number},
+	#{commodity.id},
+	#{totalmoney},
+	#{state},
+	#{remark}
+	)
   </insert>
 
   <delete id="delete" parameterType="int">

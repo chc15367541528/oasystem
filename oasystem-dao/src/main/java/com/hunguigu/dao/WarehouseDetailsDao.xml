@@ -40,6 +40,26 @@
 
     <insert id="insert" parameterType="WarehouseDetails">
 
+    INSERT INTO `sk_item`.`warehousedetails` (
+  `id`,
+  `warehouse_id`,
+  `commodity_id`,
+  `img`,
+  `number`,
+  `min_number`,
+  `remark`
+)
+VALUES
+  (
+    NULL,
+    #{warehouse.id},
+    #{commodity.id},
+    #{img},
+    #{number},
+    #{min_number},
+    #{remark}
+  )
+
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -51,11 +71,23 @@ WHERE `id` =#{id}
 
     <update id="update" parameterType="WarehouseDetails">
 
+UPDATE
+  `sk_item`.`warehousedetails`
+SET
+  number=number+#{number}
+WHERE `id` = #{id};
+
     </update>
 
-    <select id="queryComByWarehouseId" parameterType="int" resultType="Commodity">
-        SELECT * FROM commodity
-WHERE id NOT IN(SELECT commodity_id FROM warehousedetails WHERE warehouse_id =#{warehouseId})
-    </select>
+    <update id="updataByComAndWarehouse" parameterType="WarehouseDetails">
+
+UPDATE
+  `sk_item`.`warehousedetails`
+SET
+  number=number+#{number}
+WHERE commodity_id=#{commodity.id}
+AND warehouse_id=#{warehouse.id}
+
+    </update>
 
 </mapper>

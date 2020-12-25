@@ -3,16 +3,17 @@ package com.hunguigu.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hunguigu.service.WarehouseDetailsService;
-import com.hunguigu.vo.Commodity;
-import com.hunguigu.vo.PageVo;
-import com.hunguigu.vo.Warehouse;
-import com.hunguigu.vo.WarehouseDetails;
+import com.hunguigu.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/warehouseDetail")
@@ -62,12 +63,67 @@ public class WarehouseDetailController {
 
     }
 
-    @RequestMapping(value = "/queryComByWarehouseId.action",produces = {"text/json;charset=utf-8"})
+    @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
-    public String queryComByWarehouseId(@RequestParam(value = "warehouse_id", defaultValue = "0") int warehouse_id){
+    public String insert(WarehouseDetails warehouseDetails,
+                         @RequestParam(value = "commodity_id", defaultValue = "0") int commodity_id,
+                         @RequestParam(value = "warehouse_id", defaultValue = "0") int warehouse_id) throws IOException {
 
-        return JSONObject.toJSONString(service.queryComByWarehouseId(warehouse_id), SerializerFeature.DisableCircularReferenceDetect);
+        if(commodity_id!=0){
+            Commodity commodity = new Commodity();
+            commodity.setId(commodity_id);
+            warehouseDetails.setCommodity(commodity);
+        }
+
+        if(warehouse_id!=0){
+            Warehouse warehouse = new Warehouse();
+            warehouse.setId(warehouse_id);
+            warehouseDetails.setWarehouse(warehouse);
+        }
+        int row = service.insert(warehouseDetails);
+        String msg = row==1?"添加成功":"添加失败";
+
+        return msg;
+
+    }
+
+    @RequestMapping(value = "/update.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String insert(WarehouseDetails warehouseDetails) throws IOException {
+
+        int row = service.update(warehouseDetails);
+        String msg = row==1?"修改成功":"修改失败";
+
+        return msg;
+
+    }
+
+    @RequestMapping(value = "/updateByComAndWarehouse.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String updateByComAndWarehouse(WarehouseDetails warehouseDetails,
+                                        @RequestParam(value = "commodity_id", defaultValue = "0") int commodity_id,
+                                        @RequestParam(value = "warehouse_id", defaultValue = "0") int warehouse_id) throws IOException {
+
+        if(commodity_id!=0){
+            Commodity commodity = new Commodity();
+            commodity.setId(commodity_id);
+            warehouseDetails.setCommodity(commodity);
+        }
+
+        if(warehouse_id!=0){
+            Warehouse warehouse = new Warehouse();
+            warehouse.setId(warehouse_id);
+            warehouseDetails.setWarehouse(warehouse);
+        }
+
+        int row = service.updateByComAndWarehouse(warehouseDetails);
+        String msg = row==1?"修改成功":"修改失败";
+
+        return msg;
+
     }
 
 }

@@ -22,10 +22,12 @@
   </resultMap>
 
   <select id="query" parameterType="ShoppingCart" resultMap="shoppingcartmap">
-        SELECT * FROM
-  `sk_item`.`shoppingcart`
+        SELECT * FROM `sk_item`.`shoppingcart`
   <where>
     <if test="user!=null">and user_id=#{user.id}</if>
+    <if test="commodity!=null">and commodity_id=#{commodity.id}</if>
+    <if test="colorInfo!=null">and colorinfo_id=#{colorInfo.id}</if>
+    <if test="versionInfo!=null">and versioninfo_id=#{versionInfo.id}</if>
   </where>
 
   </select>
@@ -41,6 +43,9 @@
     `sk_item`.`shoppingcart`
     <where>
       <if test="user!=null">and user_id=#{user.id}</if>
+      <if test="commodity!=null">and commodity_id=#{commodity.id}</if>
+      <if test="colorInfo!=null">and colorinfo_id=#{colorInfo.id}</if>
+      <if test="versionInfo!=null">and versioninfo_id=#{versionInfo.id}</if>
     </where>
   </select>
 
@@ -57,7 +62,7 @@ WHERE `id` =#{id}
   </delete>
 
   <update id="update" parameterType="ShoppingCart">
-
+    update shoppingcart set number = number+#{number} where id=#{id}
   </update>
 
 </mapper>

@@ -33,6 +33,11 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
+    public List<Commodity> querySaleNum() {
+        return commodityDao.querySaleNum();
+    }
+
+    @Override
     public Commodity queryById(int id) {
         return commodityDao.queryById(id);
     }
@@ -57,11 +62,23 @@ public class CommodityServiceImpl implements CommodityService {
         List<Commodity> list = commodityDao.query(commodity);
 
         for (Commodity commodity2 : list) {
-            String price = versionInfoDao.queryByCommodityId(commodity2.getId()).get(0).getPrice().toString();
-            commodity2.setMinPrice(price);
+            List<VersionInfo> list1=versionInfoDao.queryByCommodityId(commodity2.getId());
+
+            if (list1.get(0)!=null){
+                String price = list1.get(0).getPrice().toString();
+                commodity2.setMinPrice(price);
+            }
         }
 
         return list;
     }
+    @Override
+    public List<Commodity> queryComByWarehouseIdNot(int warehouseId) {
+        return commodityDao.queryComByWarehouseIdNot(warehouseId);
+    }
 
+    @Override
+    public List<Commodity> queryComByWarehouseId(int warehouseId) {
+        return commodityDao.queryComByWarehouseId(warehouseId);
+    }
 }

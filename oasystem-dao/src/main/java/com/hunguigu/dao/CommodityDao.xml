@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.CommodityDao">
-  <resultMap id="commoditymap" type="Commodity">
-    <collection property="commodityType" javaType="CommodityType"
-                column="commodity_type_id" select="com.hunguigu.dao.CommodityTypeDao.queryById"
-                fetchType="lazy">
-    </collection>
-    <collection property="brand" javaType="Brand"
-                column="brand_id" select="com.hunguigu.dao.BrandDao.queryById"
-                fetchType="lazy">
-    </collection>
-  </resultMap>
+    <resultMap id="commoditymap" type="Commodity">
+        <collection property="commodityType" javaType="CommodityType"
+                    column="commodity_type_id" select="com.hunguigu.dao.CommodityTypeDao.queryById"
+                    fetchType="lazy">
+        </collection>
+        <collection property="brand" javaType="Brand"
+                    column="brand_id" select="com.hunguigu.dao.BrandDao.queryById"
+                    fetchType="lazy">
+        </collection>
+    </resultMap>
 
-<select id="query" parameterType="Commodity" resultMap="commoditymap">
-    SELECT
-    *
-    FROM
-    `sk_item`.`commodity`
-    <where>
-        <if test="name!=null">and name like concat('%',#{name},'%')</if>
-        <if test="commodityType!=null">AND commodity_type_id =#{commodityType.id}</if>
-        <if test="brand!=null">AND brand_id =#{brand.id}</if>
-    </where>
-  </select>
+    <select id="query" parameterType="Commodity" resultMap="commoditymap">
+        SELECT
+        *
+        FROM
+        `sk_item`.`commodity`
+        <where>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
+            <if test="commodityType!=null">AND commodity_type_id =#{commodityType.id}</if>
+            <if test="brand!=null">AND brand_id =#{brand.id}</if>
+        </where>
+    </select>
 
-  <select id="queryTotal" parameterType="Commodity" resultType="int">
-      SELECT
-      count(*)
-      FROM
-      `sk_item`.`commodity`
-      <where>
-          <if test="name!=null">and name like concat('%',#{name},'%')</if>
-          <if test="commodityType!=null">AND commodity_type_id =#{commodityType.id}</if>
-          <if test="brand!=null">AND brand_id =#{brand.id}</if>
-      </where>
-  </select>
+    <select id="queryTotal" parameterType="Commodity" resultType="int">
+        SELECT
+        count(*)
+        FROM
+        `sk_item`.`commodity`
+        <where>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
+            <if test="commodityType!=null">AND commodity_type_id =#{commodityType.id}</if>
+            <if test="brand!=null">AND brand_id =#{brand.id}</if>
+        </where>
+    </select>
+
+    <select id="querySaleNum" parameterType="Commodity" resultMap="commoditymap">
+        SELECT COUNT(*) AS saleNum,c.* FROM userorder u
+        INNER JOIN commodity c ON u.`commodity_id`=c.`id`
+        GROUP BY commodity_id
+        ORDER BY COUNT(*) DESC
+    </select>
 
     <insert id="insert" parameterType="Commodity">
         insert into commodity values(null,#{name},#{specifications},#{commodityType.id},#{brand.id},#{img},#{remark})
     </insert>
 
-  <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="int">
         delete from commodity where id=#{id}
     </delete>
 
-  <update id="update" parameterType="Commodity">
+    <update id="update" parameterType="Commodity">
         update commodity
         <trim prefix="set" suffixOverrides=",">
             <if test="name!=null">name=#{name},</if>
@@ -55,11 +62,20 @@
             <if test="remark!=null">remark=#{remark},</if>
         </trim>
         where id=#{id}
-  </update>
+    </update>
 
-  <select id="queryById" parameterType="int" resultMap="commoditymap">
+    <select id="queryById" parameterType="int" resultMap="commoditymap">
         SELECT * FROM commodity WHERE id=#{id}
   </select>
 
+    <select id="queryComByWarehouseIdNot" parameterType="int" resultMap="commoditymap">
+        SELECT * FROM commodity
+        WHERE id NOT IN(SELECT commodity_id FROM warehousedetails WHERE warehouse_id =#{warehouseId})
+    </select>
+
+    <select id="queryComByWarehouseId" parameterType="int" resultMap="commoditymap">
+        SELECT * FROM commodity
+        WHERE id IN(SELECT commodity_id FROM warehousedetails WHERE warehouse_id =#{warehouseId})
+    </select>
 
 </mapper>

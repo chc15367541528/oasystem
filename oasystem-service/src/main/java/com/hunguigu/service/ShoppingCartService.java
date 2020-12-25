@@ -18,6 +18,6 @@ public interface ShoppingCartService {
 
     public int update(ShoppingCart shoppingCart);
 
-    public List<ShoppingCart> queryAll();
+    public List<ShoppingCart> queryAll(ShoppingCart shoppingCart);
 
 }

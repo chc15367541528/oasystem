@@ -21,6 +21,11 @@ public interface WarehouseDetailsDao {
 
     public int update(WarehouseDetails warehouseDetails);
 
-    public List<Commodity> queryComByWarehouseId(int warehouseId);
+    /**
+     * 根据仓库id和商品id来采购商品
+     * @param warehouseDetails
+     * @return
+     */
+    public int updataByComAndWarehouse(WarehouseDetails warehouseDetails);
 
 }

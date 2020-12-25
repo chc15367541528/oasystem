@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/commodity")
@@ -46,13 +47,12 @@ public class CommodityController {
         return JSONObject.toJSONString(service.query(commodity,page,rows), SerializerFeature.DisableCircularReferenceDetect);
     }
 
-    @RequestMapping(value = "/queryAll.action",produces = {"text/json;charset=utf-8"})
+    @RequestMapping(value = "/queryAll.action")
     @ResponseBody
     @CrossOrigin
-    public String queryAll(Commodity commodity,
-                           @RequestParam(value = "commodityType_id", defaultValue = "0") int commodityType_id,
-                           @RequestParam(value = "brand_id", defaultValue = "0") int brand_id,
-                           @RequestParam(value = "file",required = false) MultipartFile img){
+    public List<Commodity> queryAll(Commodity commodity,
+                         @RequestParam(value = "commodityType_id", defaultValue = "0") int commodityType_id,
+                         @RequestParam(value = "brand_id", defaultValue = "0") int brand_id){
 
         if(commodityType_id!=0){
             CommodityType commodityType = new CommodityType();
@@ -66,7 +66,14 @@ public class CommodityController {
             commodity.setBrand(brand);
         }
 
-        return JSONObject.toJSONString(service.queryAll(commodity), SerializerFeature.DisableCircularReferenceDetect);
+        return service.queryAll(commodity);
+    }
+
+    @RequestMapping(value = "/querySaleNum.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Commodity> querySaleNum(){
+        return service.querySaleNum();
     }
 
     @RequestMapping(value = "/insert.action",produces = {"text/json;charset=utf-8"})
@@ -91,12 +98,12 @@ public class CommodityController {
 
         if(img!=null){
             commodity.setImg(img.getOriginalFilename());  //保存到数据库的【相对路径】
-            System.out.println(commodity);
-            System.out.println(img.getBytes().length);
             //将上传的文件保存到服务器上的前端项目的【绝对路径】
-            img.transferTo(new File("D:\\S3\\project-web\\oasystem-web\\src\\assets\\"+img.getOriginalFilename()));
+            /*img.transferTo(new File("D:\\S3\\project-web\\oasystem-web\\src\\assets\\"+img.getOriginalFilename()));*/
         }
 
+
+        System.out.println(commodity);
 
         int row = service.insert(commodity);
         String msg = row==1?"添加成功":"添加失败";
@@ -164,5 +171,31 @@ public class CommodityController {
 
         return JSONObject.toJSONString(service.queryById(id), SerializerFeature.DisableCircularReferenceDetect);
 
+    }
+
+    /**
+     * 根据仓库id查询出属于该仓库的商品
+     * @param warehouse_id
+     * @return
+     */
+    @RequestMapping(value = "/queryComByWarehouseId.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryComByWarehouseId(@RequestParam(value = "warehouse_id", defaultValue = "0") int warehouse_id){
+
+        return JSONObject.toJSONString(service.queryComByWarehouseId(warehouse_id), SerializerFeature.DisableCircularReferenceDetect);
+    }
+
+    /**
+     * 根据仓库id查询出不属于该仓库的商品
+     * @param warehouse_id
+     * @return
+     */
+    @RequestMapping(value = "/queryComByWarehouseIdNot.action",produces = {"text/json;charset=utf-8"})
+    @ResponseBody
+    @CrossOrigin
+    public String queryComByWarehouseIdNot(@RequestParam(value = "warehouse_id", defaultValue = "0") int warehouse_id){
+
+        return JSONObject.toJSONString(service.queryComByWarehouseIdNot(warehouse_id), SerializerFeature.DisableCircularReferenceDetect);
     }
 }

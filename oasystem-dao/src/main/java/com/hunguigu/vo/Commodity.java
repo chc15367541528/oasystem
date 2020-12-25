@@ -26,6 +26,8 @@ public class Commodity {
 
     private String minPrice;//查询商品使用
 
+    private Integer saleNum;//销量
+
     public Integer getId() {
         return id;
     }
@@ -88,5 +90,28 @@ public class Commodity {
 
     public void setMinPrice(String minPrice) {
         this.minPrice = minPrice;
+    }
+
+    public Integer getSaleNum() {
+        return saleNum;
+    }
+
+    public void setSaleNum(Integer saleNum) {
+        this.saleNum = saleNum;
+    }
+
+    @Override
+    public String toString() {
+        return "Commodity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", specifications='" + specifications + '\'' +
+                ", commodityType=" + commodityType +
+                ", brand=" + brand +
+                ", img='" + img + '\'' +
+                ", remark='" + remark + '\'' +
+                ", minPrice='" + minPrice + '\'' +
+                ", saleNum=" + saleNum +
+                '}';
     }
 }

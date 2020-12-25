@@ -2,10 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hunguigu.dao.UserDao">
   <resultMap id="usermap" type="User">
-    <collection property="merchants" javaType="User"
-                column="user_id" select="com.hunguigu.dao.UserDao.queryById"
-                fetchType="lazy">
-    </collection>
     <collection property="role" javaType="Role"
                 column="role_id" select="com.hunguigu.dao.RoleDao.queryById"
                 fetchType="lazy">
@@ -23,9 +19,6 @@
         SELECT * FROM user WHERE id=#{id}
   </select>
 
-    <select id="queryById2" parameterType="int" resultType="User">
-        SELECT * FROM user WHERE id=#{id}
-  </select>
 
   <select id="queryTotal" parameterType="User" resultType="int">
     SELECT count(*) FROM user

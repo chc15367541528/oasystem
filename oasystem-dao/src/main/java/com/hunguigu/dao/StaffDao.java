@@ -1,6 +1,7 @@
 package com.hunguigu.dao;
 
 import com.hunguigu.vo.Staff;
+import com.hunguigu.vo.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,7 @@ public interface StaffDao {
     public int delete(int id);
 
     public int update(Staff staff);
+
+    public Staff staffDengLu(Staff staff);
 
 }

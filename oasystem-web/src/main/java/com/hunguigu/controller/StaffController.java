@@ -6,9 +6,14 @@ import com.hunguigu.service.RoleService;
 import com.hunguigu.service.StaffService;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.Staff;
+import com.hunguigu.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/staff")
@@ -18,6 +23,28 @@ public class StaffController {
     StaffService service;
     @Autowired
     RoleService roleService;
+
+
+    @RequestMapping(value = "/login.action")
+    @ResponseBody
+    @CrossOrigin
+    public Map login(Staff staff,
+                     HttpSession session){
+        Map<String,String> map =new HashMap<String,String>();
+        Staff staff1= service.staffDengLu(staff);
+
+        if(staff1!=null){
+            session.setAttribute("staff",staff1);
+
+            map.put("code","0");
+            map.put("msg","登录成功");
+            map.put("account",staff1.getAccount());
+        }else{
+            map.put("code","1");
+            map.put("msg","登录失败");
+        }
+        return map;
+    }
 
     @RequestMapping(value = "/query.action",produces = {"text/json;charset=utf-8"})
     @ResponseBody

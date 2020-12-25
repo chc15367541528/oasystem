@@ -18,26 +18,16 @@ public class MenuController {
     @Autowired
     MenuService service;
 
-    //查询出所有的菜单信息(菜单显示用，有层级关系)
+    //查询出所有的菜单信息(授权页面用，显示到按钮级别)
     @RequestMapping("/queryAllMenus.action")
     @ResponseBody
     @CrossOrigin
-    public List<MenuInfo> queryallmenus(){
+    public List<MenuInfo> queryAllMenus(int rid){
 
-        return  service.queryAllMenus(2,0);
+        return service.queryAllMenus(3,rid);
     }
 
-    //查询出所有的菜单信息(授权页面用，显示到按钮级别)
-    //2020-10-12修改
-    @RequestMapping("/queryAllMenus2.action")
-    @ResponseBody
-    @CrossOrigin
-    public List<MenuInfo> queryallmenus2(int rid){
-
-        return  service.queryAllMenus(3,rid);
-    }
-
-    @RequestMapping(value = "/auth.action",produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/authority.action",produces = {"application/json;charset=utf-8"})
     @ResponseBody
     @CrossOrigin
     public String authSave(

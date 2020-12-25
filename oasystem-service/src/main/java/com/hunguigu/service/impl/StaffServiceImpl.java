@@ -5,6 +5,7 @@ import com.hunguigu.dao.StaffDao;
 import com.hunguigu.service.StaffService;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.Staff;
+import com.hunguigu.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,10 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<Staff> queryAll() {
         return staffDao.query(new Staff());
+    }
+
+    @Override
+    public Staff staffDengLu(Staff staff){
+        return staffDao.staffDengLu(staff);
     }
 }

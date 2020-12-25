@@ -3,10 +3,13 @@ package com.hunguigu.service;
 import com.hunguigu.vo.Authority;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.Staff;
+import com.hunguigu.vo.User;
 
 import java.util.List;
 
 public interface StaffService {
+
+    public Staff staffDengLu(Staff staff);
 
     public PageVo<Staff> query(Staff staff, int page, int rows);
 

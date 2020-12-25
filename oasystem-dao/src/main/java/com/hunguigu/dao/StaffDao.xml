@@ -8,6 +8,19 @@
         </collection>
     </resultMap>
 
+    <select id="staffDengLu" parameterType="Staff" resultMap="staffmap">
+SELECT
+  `id`,
+  `name`,
+  `account`,
+  `password`,
+  `role_id`,
+  `remark`
+FROM
+  `sk_item`.`staff`
+  where account =#{account} and password =#{password}
+    </select>
+
     <select id="query" parameterType="Staff" resultMap="staffmap">
         SELECT
         `id`,

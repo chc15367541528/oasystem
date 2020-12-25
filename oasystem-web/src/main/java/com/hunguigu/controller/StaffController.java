@@ -34,7 +34,7 @@ public class StaffController {
         Staff staff1= service.staffDengLu(staff);
 
         if(staff1!=null){
-            session.setAttribute("user",staff1);
+            session.setAttribute("staff",staff1);
 
             map.put("code","0");
             map.put("msg","登录成功");

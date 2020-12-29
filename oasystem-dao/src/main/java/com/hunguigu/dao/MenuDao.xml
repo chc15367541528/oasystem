@@ -84,8 +84,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			INNER JOIN rolemenu rm
 			ON m.id =rm.mid
 			WHERE m.parentid =#{pid}
-			AND rm.rid  IN(
-				SELECT  staffrole.roleid FROM staff s INNER JOIN  staffrole ON s.id=staffrole.staffid
+			AND rm.rid IN(
+				SELECT staffrole.roleid FROM staff s INNER JOIN staffrole ON s.id=staffrole.staffid
+				WHERE s.id =#{id}
+			)
+	</select>
+
+	<select id="queryMenuByNodeTypeAndSid"  resultMap="menumap">
+		SELECT DISTINCT m.menucode FROM menu m
+			INNER JOIN rolemenu rm
+			ON m.id =rm.mid
+			WHERE m.nodetype =3
+			AND rm.rid IN(
+				SELECT staffrole.roleid FROM staff s INNER JOIN staffrole ON s.id=staffrole.staffid
 				WHERE s.id =#{id}
 			)
 	</select>

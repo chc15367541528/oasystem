@@ -3,6 +3,7 @@ package com.hunguigu.controller;
 import com.hunguigu.service.MenuService;
 import com.hunguigu.service.RoleMenuService;
 import com.hunguigu.vo.*;
+import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,23 @@ public class MenuController {
     public List<Menu> queryAllLeftMenu(int sid){
 
         return menuService.queryAllLeftMenu(sid);
+    }
+
+    //查询当前用户拥有的子菜单
+    @RequestMapping("/queryAllMenuNodeType.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Menu> queryAllMenuNodeType(int sid){
+        System.out.println(menuService.queryAllMenuNodeType(sid));
+
+//        List<Menu> list = menuService.queryAllMenuNodeType(sid);
+//        List<String> list1 = null;
+//
+//        for(Menu m : list){
+//            list1.add(m.getMenuCode());
+//        }
+
+        return menuService.queryAllMenuNodeType(sid);
     }
 
     //查询授权菜单

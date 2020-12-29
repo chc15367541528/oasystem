@@ -38,4 +38,7 @@ public interface MenuDao {
     public List<Menu> querymenuBypidandsid(@Param("id") int id,
                                            @Param("pid") int pid);
 
+    //通过员工id和父id查询
+    public List<Menu> queryMenuByNodeTypeAndSid(@Param("id") int id);
+
 }

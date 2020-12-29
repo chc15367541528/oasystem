@@ -1,6 +1,5 @@
 package com.hunguigu.service;
 
-import com.hunguigu.vo.Authority;
 import com.hunguigu.vo.PageVo;
 import com.hunguigu.vo.User;
 

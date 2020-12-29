@@ -12,12 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/role")
 public class RoleController {
 
     @Autowired
     RoleService service;
+
+    @RequestMapping("/queryfenpeirole.action")
+    @ResponseBody
+    @CrossOrigin
+    public List<Role> queryFenPeiRole(){
+        return service.queryFenPeiRole();
+    }
 
     @RequestMapping(value = "/queryAll.action", produces = {"text/json;charset=utf-8"})
     @ResponseBody

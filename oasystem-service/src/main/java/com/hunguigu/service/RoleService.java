@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface RoleService {
 
+    //分配角色插叙
+    public List<Role> queryFenPeiRole();
+
     public PageVo<Role> query(Role role, int page, int rows);
 
     public Role queryById(int id);

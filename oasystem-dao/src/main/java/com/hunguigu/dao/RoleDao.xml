@@ -68,4 +68,11 @@ WHERE `id` = #{id} ;
 			on r.id = ur.rid
 			where ur.uid =#{uid}
 	</select>
+
+  <!-- 查询角色名-->
+<!--  <select id="queryRoleName" parameterType="String" resultType="Role">-->
+
+<!--		  SELECT * FROM role WHERE name=#{name}-->
+
+<!--	</select>-->
 </mapper>

@@ -17,6 +17,16 @@ public class RoleServiceImpl implements RoleService {
     RoleDao roleDao;
 
     @Override
+    public List<Role> queryFenPeiRole() {
+        List<Role> list=roleDao.query(new Role());
+        for (Role r:list) {
+            r.setId(r.getId());
+            r.setLabel(r.getName());
+        }
+        return list;
+    }
+
+    @Override
     public PageVo<Role> query(Role role, int page, int rows) {
         PageVo<Role> pageVo = new PageVo<>();
 

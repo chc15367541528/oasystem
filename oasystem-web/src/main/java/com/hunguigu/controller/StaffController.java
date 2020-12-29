@@ -39,6 +39,7 @@ public class StaffController {
             map.put("code","0");
             map.put("msg","登录成功");
             map.put("account",staff1.getAccount());
+            map.put("id",staff1.getId().toString());
         }else{
             map.put("code","1");
             map.put("msg","登录失败");

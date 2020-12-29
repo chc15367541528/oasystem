@@ -12,6 +12,12 @@ public class Role {
 
     private List<Menu> menus;
 
+    private List<Menu> menu;
+    private Integer rid;
+    private String label;
+
+    private boolean checked;
+
     private String remark;//备注
 
     public Integer getId() {
@@ -43,5 +49,37 @@ public class Role {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public List<Menu> getMenu() {
+        return menu;
+    }
+
+    public void setMenu(List<Menu> menu) {
+        this.menu = menu;
+    }
+
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
